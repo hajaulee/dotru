@@ -26,6 +26,7 @@ export function loadSavedManga(url: string): SManga {
   const libraryMangaList = loadLibraryMangaList();
   return {
     ...savedData,
+    readChapters: savedData.readChapters.sort((a, b) => a - b).reverse(),
     author: "UNKNOWN",
     status: "UNKNOWN",
     description: source ? "Loading": "No source",

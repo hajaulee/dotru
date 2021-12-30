@@ -8,6 +8,8 @@ import {SManga} from "../../shares/models/smanga";
 export class MangaCardComponent implements OnInit {
 
   @Input() manga: SManga;
+    @Input() badge?: number| string | undefined;
+
   constructor() { }
 
   ngOnInit(): void {

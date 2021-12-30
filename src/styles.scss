@@ -42,6 +42,18 @@ body {
   margin-right: 1em;
 }
 
+.card-badge {
+  position: absolute;
+  height: 18px;
+  background-color: blueviolet;
+  font-size: 8px;
+  font-weight: bold;
+  border-radius: 10px;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: white;
+  border: solid 1px white;
+}
 
 hr {
   width: 90%;

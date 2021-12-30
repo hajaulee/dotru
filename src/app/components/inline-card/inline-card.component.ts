@@ -12,7 +12,7 @@ export class InlineCardComponent implements OnInit {
   @Input() title: string;
   @Input() subTitle: string;
   @Input() data: any;
-  @Input() badge?: string;
+  @Input() badge?: number| string | undefined;
 
   @Output() onClick = new EventEmitter<any>();
 
