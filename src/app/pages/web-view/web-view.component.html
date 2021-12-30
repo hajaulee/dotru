@@ -1,0 +1,11 @@
+<app-header>
+  <app-back-button (onClick)="back()"></app-back-button>
+  <div right>
+    <button mat-icon-button (click)="openInNewTab()">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+  </div>
+</app-header>
+<div class="content-no-footer">
+  <iframe class="full-parent" [src]="componentData.url | safeUrl"></iframe>
+</div>

@@ -1,0 +1,41 @@
+.inline-card-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.5em;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-container {
+  @extend .center;
+  height: 48px;
+  width: 48px;
+}
+
+.mat-icon-icon-size {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+}
+
+.img-icon {
+  width: 48px;
+  margin-right: 1em;
+  border-radius: 5px;
+}
+
+.card-badge {
+  position: absolute;
+  height: 18px;
+  background-color: greenyellow;
+  font-size: 8px;
+  font-weight: bold;
+  border-radius: 10px;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: black;
+}

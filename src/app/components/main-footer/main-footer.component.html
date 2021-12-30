@@ -1,0 +1,24 @@
+<footer>
+  <mat-toolbar style="justify-content: space-between">
+    <app-icon-button
+      icon="collections_bookmark"
+      [color]="activePage == 'lib' ? 'primary' : undefined"
+      label="Library"
+      (click)="gotoLibrary()">
+    </app-icon-button>
+    <app-icon-button
+      icon="new_releases"
+      [color]="activePage == 'update' ? 'primary' : undefined"
+      label="Updates"
+      (click)="gotoUpdates()"></app-icon-button>
+    <app-icon-button
+      icon="history"
+      [color]="activePage == 'history' ? 'primary' : undefined"
+      label="History"
+      (click)="gotoHistory()"></app-icon-button>
+    <app-icon-button icon="explore" [color]="activePage == 'browser' ? 'primary' : undefined" label="Browser"
+                     (click)="gotoBrowser()"></app-icon-button>
+    <app-icon-button icon="more_horiz" [color]="activePage == 'more' ? 'primary' : undefined" label="More"
+                     (click)="gotoMore()"></app-icon-button>
+  </mat-toolbar>
+</footer>

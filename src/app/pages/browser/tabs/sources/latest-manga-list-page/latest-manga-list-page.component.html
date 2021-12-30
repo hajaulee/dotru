@@ -1,0 +1,21 @@
+<app-header>
+  <app-back-button (onClick)="back()"></app-back-button>
+  <span>{{componentData.source.name}}</span>
+  <div right>
+    <button mat-icon-button (click)="goToMangaWebView()"><mat-icon>public</mat-icon></button>
+  </div>
+</app-header>
+<div class="content-no-footer">
+  <ng-container *ngIf="mangaList$ | async as mangaList; else loading">
+    <app-manga-list
+      [mangaList]="mangaList"
+      (loadMore)="loadMore()"
+      (mangaClick)="showDetailManga($event)">
+    </app-manga-list>
+  </ng-container>
+
+  <ng-template #loading>
+    <mat-spinner [diameter]="48" style="margin: 10em auto auto;"></mat-spinner>
+  </ng-template>
+</div>
+

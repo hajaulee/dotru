@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
+
+@import "~@angular/material/theming";
+@import "theme";
+
+@include mat.core();
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.full-width{
+  width: 100%;
+}
+
+.content {
+  height: calc(100% - 112px);
+  overflow: scroll;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.content-no-footer {
+  @extend .content;
+  height: calc(100% - 56px);
+}
+
+.content-fullscreen {
+  @extend .content;
+  height: 100%;
+}
+
+.button-group button {
+  margin-right: 1em;
+}
+
+
+hr {
+  width: 90%;
+}

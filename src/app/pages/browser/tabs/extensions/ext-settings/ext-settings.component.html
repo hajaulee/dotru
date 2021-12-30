@@ -1,0 +1,19 @@
+<app-header>
+  <app-back-button (onClick)="back()"></app-back-button>
+  <span>{{componentData.ext.name}}</span>
+</app-header>
+<div class="content-no-footer">
+  <div>
+    <img src="{{componentData.ext.thumbnail}}" alt="{{componentData.ext.name}}" style="height: 60px"/>
+    <div style="display: inline-block">
+      <div class="mat-body-2">{{componentData.ext.name}}</div>
+      <div class="mat-caption">Version: {{componentData.ext.version}}</div>
+      <div class="mat-caption">Language: {{componentData.ext.lang | langName}}</div>
+    </div>
+  </div>
+  <div class="button-group" style="text-align: center; margin-top: 2em;">
+    <button mat-button mat-stroked-button color="warn" (click)="uninstallExt()">Uninstall</button>
+    <button mat-button mat-raised-button color="primary" (click)="viewSource()">Source</button>
+    <button mat-button (click)="back()">Back</button>
+  </div>
+</div>

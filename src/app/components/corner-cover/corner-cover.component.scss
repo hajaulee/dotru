@@ -1,0 +1,50 @@
+
+$cover-percent: 30%;
+
+.cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  div {
+    position: absolute;
+    text-align: center;
+    opacity: 0.5;
+    display: flex;
+
+    span{
+      margin: auto;
+      font-size: 36px;
+    }
+  }
+
+  .top {
+    width: 100%;
+    height: $cover-percent;
+    top: 0;
+    background-color: yellow;
+  }
+
+  .bottom {
+    width: 100%;
+    height: $cover-percent;
+    bottom: 0;
+    background-color: green;
+  }
+
+  .left {
+    height: 100%;
+    width: $cover-percent;
+    left: 0;
+    background-color: red;
+  }
+
+  .right {
+    height: 100%;
+    width: $cover-percent;
+    right: 0;
+    background-color: blue;
+  }
+}

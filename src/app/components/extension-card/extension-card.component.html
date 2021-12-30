@@ -1,0 +1,9 @@
+<div class="ext-card-container" matRipple (click)="onClick()">
+  <img src="{{extension.thumbnail}}"  alt="{{extension.name}}" style="height: 48px"/>
+  <div>
+    <div class="mat-body-2">{{extension.name}}</div>
+    <div class="mat-caption"> {{ extension.lang | langName}} {{ showVersion ? extension.version : ""}}</div>
+  </div>
+  <span style="flex: auto"></span>
+  <ng-content></ng-content>
+</div>

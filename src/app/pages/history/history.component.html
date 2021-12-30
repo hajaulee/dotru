@@ -1,0 +1,18 @@
+<app-header><span>History</span></app-header>
+<div class="content">
+  <ng-container *ngFor="let mangaList of groupedByDateMangaLists">
+    <h4 class="mat-subheading-1">{{mangaList[0].lastReadingTime | relativeDate}}</h4>
+    <ng-container *ngFor="let manga of mangaList">
+      <app-inline-card
+        [iconUrl]="manga.thumbnailUrl"
+        [title]="manga.title | maxLength : 15"
+        [subTitle]="( manga.readChapters && manga.readChapters.length > 0 ? ( 'Ch. ' + manga.readChapters.slice().reverse()[0]) : 'Unknown') + ' - ' + (manga.lastReadingTime | date : 'hh:mm')"
+        (onClick)="showDetailManga(manga)"
+      >
+        <button mat-icon-button (click)="removeHistory(manga)"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-icon-button [disabled]="!manga.readChapters || !manga.readChapters.length " (click)="resumeReading(manga)"><mat-icon>play_arrow</mat-icon></button>
+      </app-inline-card>
+    </ng-container>
+  </ng-container>
+</div>
+<app-main-footer activePage="history"></app-main-footer>

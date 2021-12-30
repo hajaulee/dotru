@@ -1,0 +1,21 @@
+.icon-label-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-label {
+  font-size: small;
+  height: 1em;
+  line-height: 1em;
+}
+
+.button-wrapper {
+  width: 100%;
+
+  .mat-icon-button {
+    border-radius: 0 !important;
+    width: unset!important;
+  }
+}

@@ -1,0 +1,9 @@
+<app-header><span>Library</span></app-header>
+<div class="content">
+  <app-manga-list
+    [mangaList]="mangaList"
+    [showLoadMore]="false"
+    (mangaClick)="showDetailManga($event)">
+  </app-manga-list>
+</div>
+<app-main-footer activePage="lib"></app-main-footer>

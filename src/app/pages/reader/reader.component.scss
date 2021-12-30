@@ -1,0 +1,53 @@
+.reader-content {
+  padding: 0 !important;
+}
+
+.page-jump-container {
+  position: fixed;
+  bottom: 30px;
+  left: 10px;
+  right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider-container {
+  background-color: lightgray;
+  text-align: center;
+  border-radius: 60px;
+  flex-grow: 1;
+
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.reader-slider {
+  width: 80%;
+}
+
+.page-container {
+  display: flex; // somehow it make div no padding;
+
+  img {
+    width: 100%;
+  }
+}
+
+.page-container-one-page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+  }
+}
+

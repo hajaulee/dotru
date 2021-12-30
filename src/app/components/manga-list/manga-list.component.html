@@ -1,0 +1,19 @@
+<mat-grid-list cols="3" rowHeight="2:3" gutterSize="0.5em">
+  <mat-grid-tile *ngFor="let manga of mangaList">
+    <app-manga-card [manga]="manga" (click)="mangaClick.emit(manga)"></app-manga-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<div class="button-group" *ngIf="showLoadMore" style="text-align: center; margin: 15px">
+  <button *ngIf="loadStatus == loadStatusEnum.LOADED" mat-button mat-flat-button (click)="loadMoreManga()">
+    <mat-icon>expand_more</mat-icon>
+    Load more
+  </button>
+  <button *ngIf="loadStatus == loadStatusEnum.RETRY" mat-button mat-flat-button (click)="loadMoreManga()">
+    <mat-icon>refresh</mat-icon>
+    Retry
+  </button>
+  <span *ngIf="loadStatus == loadStatusEnum.LOADING">
+    <mat-spinner [diameter]="30" style="margin: 0.5em auto;"></mat-spinner>
+  </span>
+
+</div>

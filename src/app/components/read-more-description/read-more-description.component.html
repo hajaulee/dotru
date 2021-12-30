@@ -1,0 +1,8 @@
+<div class="read-more" [ngStyle]="textBoxStyle" (click)="expandToggle()">
+  {{text}}
+</div>
+<p class="expand-toggle">
+  <mat-icon *ngIf="!expanding" style="font-size: 24px" (click)="expandToggle()">keyboard_arrow_down</mat-icon>
+  <mat-icon *ngIf="expanding" style="font-size: 24px" (click)="expandToggle()">keyboard_arrow_up</mat-icon>
+
+</p>

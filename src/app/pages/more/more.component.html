@@ -1,0 +1,66 @@
+<app-header><span>More</span></app-header>
+<div class="content">
+
+  <div class="app-logo-container">
+    <div><span style="font-size: 60px">Đ</span></div>
+    <div class="mat-caption">Đọc truyện tranh</div>
+    <div class="mat-caption">{{version}}</div>
+  </div>
+  <hr/>
+  <app-inline-card
+    matIcon="brightness_6"
+    title="Dark mode"
+    subTitle="Dark mode"
+  >
+    <mat-slide-toggle
+      color="primary"
+      [checked]="settingsLoader.settings.darkMode"
+      (change)="toggleDarkMode($event)">
+
+    </mat-slide-toggle>
+  </app-inline-card>
+  <app-inline-card
+    matIcon="lock"
+    title="Incognito mode"
+    subTitle="Pauses reading history"
+  >
+    <mat-slide-toggle
+      color="primary"
+      [checked]="!settingsLoader.settings.logHistory"
+      (change)="toggleIncognitoMode($event)">
+
+    </mat-slide-toggle>
+  </app-inline-card>
+  <app-inline-card
+    [matIcon]="settingsLoader.settings.defaultReadingMode == readingModeEnum.L2R ? 'swipe_right_alt' :
+    settingsLoader.settings.defaultReadingMode == readingModeEnum.R2L ? 'swipe_left_alt': 'swipe_down_alt' "
+    title="Reading mode"
+    subTitle="Default reading mode"
+    [matMenuTriggerFor]="readingModeMenu"
+  >
+  </app-inline-card>
+  <hr/>
+    <app-inline-card
+    matIcon="people"
+    title="Github"
+    subTitle="Repository of this project"
+    (onClick)="gotoRepo()"
+  >
+  </app-inline-card>
+
+  <mat-menu #readingModeMenu="matMenu">
+    <button mat-menu-item (click)="toggleReadingMode(readingModeEnum.L2R)">
+      <mat-icon>swipe_right_alt</mat-icon>
+      <span>Left to right</span>
+    </button>
+    <button mat-menu-item (click)="toggleReadingMode(readingModeEnum.R2L)">
+      <mat-icon>swipe_left_alt</mat-icon>
+      <span>Right to left</span>
+    </button>
+    <button mat-menu-item (click)="toggleReadingMode(readingModeEnum.WEB_TOON)">
+      <mat-icon>swipe_down_alt</mat-icon>
+      <span>Webtoon</span>
+    </button>
+  </mat-menu>
+</div>
+<app-main-footer activePage="more"></app-main-footer>

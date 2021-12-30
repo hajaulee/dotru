@@ -1,0 +1,63 @@
+<app-header>
+  <app-back-button (onClick)="back()"></app-back-button>
+  <div right>
+    <button mat-icon-button (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+</app-header>
+<div class="content-no-footer">
+  <ng-container *ngIf="detailManga$ | async as manga; else loading">
+    <div class="flex-row">
+      <img src="{{manga.thumbnailUrl }}" alt="{{manga.title}}" style="width: 80px;"/>
+      <div style="padding-left: 10px;">
+        <div class="mat-body-2">{{manga.title | maxLength: 36}}</div>
+        <div class="mat-caption">{{manga.author}}</div>
+        <div class="mat-caption">{{manga.status}}・{{manga.source?.name}}
+          ({{manga.source?.lang}})
+        </div>
+      </div>
+    </div>
+    <div class="button-icon-group">
+      <app-icon-button *ngIf="!manga.inLibrary" icon="favorite_border" label="Add to Library"
+                       (click)="addToLibrary(manga)"></app-icon-button>
+      <app-icon-button *ngIf="manga.inLibrary" icon="favorite" label="In library"
+                       (click)="removeFromLibrary(manga)"></app-icon-button>
+      <app-icon-button icon="public" label="Webview" (click)="goToMangaWebView()"></app-icon-button>
+    </div>
+    <app-read-more-description [text]="manga.description!" [maxHeight]="60">
+    </app-read-more-description>
+    <mat-chip-list *ngIf="manga.genre">
+      <mat-chip
+        *ngFor="let tag of manga.genre?.split(', ')"
+        class="small-chip"
+      >{{tag}}</mat-chip>
+    </mat-chip-list>
+
+    <div *ngIf="manga.chapters">
+      <h3 class="mat-subheading-2" style="margin-top: 5px">{{manga.chapters.length}} chapters</h3>
+      <ng-container *ngFor="let chapter of manga.chapters">
+        <div [ngClass]="{'read-chapter': chapter.read}" matRipple style="margin-bottom: 5px"
+             (click)="readChapter(manga, chapter)">
+          <div class="mat-body-2">{{chapter.name}}</div>
+          <div class="mat-caption">{{ chapter.dateUpload  | relativeDate }}</div>
+        </div>
+      </ng-container>
+
+      <div class="resume-button-container"
+           *ngIf="manga.chapters.length && manga.readChapters?.length != manga.chapters.length">
+        <button mat-fab color="primary" aria-label="Resume button" (click)="resume(manga)">
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <ng-template #loading>
+    <mat-spinner [diameter]="48" style="margin: 10em auto auto;"></mat-spinner>
+  </ng-template>
+</div>

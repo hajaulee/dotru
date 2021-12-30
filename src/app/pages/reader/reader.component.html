@@ -1,0 +1,93 @@
+<app-header *ngIf="!fullscreen">
+  <app-back-button (onClick)="back()"></app-back-button>
+  <div>
+    <div class="mat-body-2">{{componentData.manga.title | maxLength: 20 }}</div>
+    <div class="mat-caption">{{chapter.name}}</div>
+  </div>
+  <div right>
+    <button mat-icon-button (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="optionMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+</app-header>
+<div class="reader-content" [ngClass]="{'content-no-footer': !fullscreen, 'content-fullscreen': fullscreen}">
+
+  <ng-container *ngIf="pages$ | async as pages; else loading">
+    <ng-container *ngIf="pages.length > 0; else empty">
+      <ng-container *ngIf="readingMode == readingModeEnum.WEB_TOON">
+        <ng-container *ngFor="let page of pages;let i = index">
+          <div class="page-container" id="page-{{i}}"
+               (click)="readingPageIndex = i;pageClick($event)"
+               (wheel)="readingPageIndex = i"
+          >
+            <img src="{{page.url}}" alt="{{page.name}}"/>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="readingMode == readingModeEnum.L2R || readingMode == readingModeEnum.R2L">
+        <div class="page-container-one-page"
+             (click)="pageClick($event)"
+             >
+          <img src="{{pages[readingPageIndex].url}}" alt="{{pages[readingPageIndex].name}}"/>
+        </div>
+      </ng-container>
+      <div *ngIf="!fullscreen" class="page-jump-container">
+        <button mat-mini-fab (click)="previousChapter()">
+          <mat-icon>first_page</mat-icon>
+        </button>
+        <div class="slider-container">
+          <span>{{readingPageIndex}}</span>
+          <mat-slider
+            class="reader-slider"
+            [max]="pages.length-1"
+            [min]="0"
+            [step]="1"
+            [thumbLabel]="true"
+            [(ngModel)]="readingPageIndex"
+            (input)="slideChange($event)"
+            (valueChange)="jumpPage($event)"
+          >
+          </mat-slider>
+          <span>{{pages.length - 1}}</span>
+        </div>
+        <button mat-mini-fab color="primary" (click)="nextChapter()">
+          <mat-icon>last_page</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #empty>
+    <h1 class="mat-title" style="text-align: center">Tèo!!!</h1>
+  </ng-template>
+  <ng-template #loading>
+    <mat-spinner [diameter]="48" style="margin: 10em auto auto;"></mat-spinner>
+  </ng-template>
+
+  <mat-menu #optionMenu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="readingModeMenu">
+      <mat-icon>{{readingMode == readingModeEnum.L2R ? 'swipe_right_alt' :
+        readingMode == readingModeEnum.R2L ? 'swipe_left_alt' : 'swipe_down_alt'}}</mat-icon>
+      <span>Reading mode</span>
+    </button>
+  </mat-menu>
+  <mat-menu #readingModeMenu="matMenu">
+    <button mat-menu-item (click)="toggleReadingMode(readingModeEnum.L2R)">
+      <mat-icon>swipe_right_alt</mat-icon>
+      <span>Left to right</span>
+    </button>
+    <button mat-menu-item (click)="toggleReadingMode(readingModeEnum.R2L)">
+      <mat-icon>swipe_left_alt</mat-icon>
+      <span>Right to left</span>
+    </button>
+    <button mat-menu-item (click)="toggleReadingMode(readingModeEnum.WEB_TOON)">
+      <mat-icon>swipe_down_alt</mat-icon>
+      <span>Webtoon</span>
+    </button>
+  </mat-menu>
+</div>
+
+<app-corner-cover *ngIf="showCornerHint"></app-corner-cover>

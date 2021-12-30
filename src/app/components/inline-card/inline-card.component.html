@@ -1,0 +1,15 @@
+<div class="inline-card-container" matRipple>
+  <div class="card-badge" *ngIf="badge">{{badge}}</div>
+  <img *ngIf="iconUrl" src="{{iconUrl}}" alt="{{title}}" class="img-icon"/>
+  <div class="icon-container" *ngIf="matIcon">
+    <mat-icon class="mat-icon-icon-size">{{matIcon}}</mat-icon>
+  </div>
+  <div (click)="click()">
+    <div class="mat-body-2">{{title}}</div>
+    <div class="mat-caption"> {{subTitle}}</div>
+  </div>
+  <span style="flex: auto"></span>
+  <div class="center">
+    <ng-content></ng-content>
+  </div>
+</div>
