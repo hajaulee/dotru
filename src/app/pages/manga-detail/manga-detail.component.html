@@ -60,4 +60,10 @@
   <ng-template #loading>
     <mat-spinner [diameter]="48" style="margin: 10em auto auto;"></mat-spinner>
   </ng-template>
+
+    <mat-menu #optionMenu="matMenu">
+    <button *ngIf="detailManga$ | async as manga" mat-menu-item (click)="markAsRead(manga)">
+      <span>Mark as read</span>
+    </button>
+  </mat-menu>
 </div>

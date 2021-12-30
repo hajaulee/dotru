@@ -94,6 +94,14 @@ export class MangaDetailComponent implements OnInit {
     this.screenTransmission.goToScreen(ReaderComponent, {manga, chapter});
   }
 
+  markAsRead(manga: SManga){
+    manga.readChapters = manga.chapters.map(chapter => chapter.chapterNumber);
+    this.componentData.manga = {...manga};
+    if (isSavedManga(manga)) {
+      saveManga(manga); // update saved data
+    }
+  }
+
   resume(manga: SManga) {
     const noReadChapter = manga.chapters
       .slice()
