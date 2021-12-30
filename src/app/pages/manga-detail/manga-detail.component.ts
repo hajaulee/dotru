@@ -96,10 +96,14 @@ export class MangaDetailComponent implements OnInit {
 
   markAsRead(manga: SManga){
     manga.readChapters = manga.chapters.map(chapter => chapter.chapterNumber);
+    manga.chapters.forEach((chapter) => {
+      chapter.read = true;
+    });
     this.componentData.manga = {...manga};
     if (isSavedManga(manga)) {
       saveManga(manga); // update saved data
     }
+    this.detailManga$.next({...manga});
   }
 
   resume(manga: SManga) {
