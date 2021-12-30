@@ -13,7 +13,8 @@ export function saveManga(manga: SManga) {
     title: manga.title,
     sourceName: manga.source?.name!,
     readChapters: manga.readChapters || [],
-    readingMode: manga.readingMode
+    readingMode: manga.readingMode,
+    latestChapterNumber: manga.latestChapterNumber
   }
   saveObject(manga.url, dataToSave);
 }

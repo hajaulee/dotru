@@ -115,6 +115,7 @@ export class Engine {
     detailManga.chapters.forEach((chapter) => {
       chapter.read = Boolean(savedManga.readChapters?.includes(chapter.chapterNumber));
     });
+    detailManga.latestChapterNumber = Math.max(...detailManga.chapters.map(chapter => chapter.chapterNumber));
 
     return {
       ...baseManga,

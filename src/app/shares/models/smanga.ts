@@ -11,5 +11,4 @@ export interface SManga extends SavedManga {
   source?: Source;
   chapters: SChapter[];
   lastReadingTime?: number;
-  latestChapterNumber?: number;
 }

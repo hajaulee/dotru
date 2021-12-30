@@ -13,5 +13,6 @@ export interface SavedManga {
   title: string;
   sourceName: string;
   readChapters: number[];
-  readingMode?: ReadingModeEnum
+  readingMode?: ReadingModeEnum;
+  latestChapterNumber?: number;
 }
