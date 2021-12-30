@@ -1,3 +1,22 @@
-<app-header><span>Updates</span></app-header>
-<div class="content"><p style="text-align: center">coming soon!</p></div>
+<app-header><span>Updates</span>
+  <div right>
+    <button mat-icon-button>
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</app-header>
+<div class="content">
+  <ng-container *ngFor="let mangaList of groupedByDateMangaLists">
+    <h4 class="mat-subheading-1">{{mangaList[0]?.latestChapter?.dateUpload! | relativeDate}}</h4>
+    <ng-container *ngFor="let manga of mangaList">
+      <app-inline-card
+        [iconUrl]="manga.thumbnailUrl"
+        [title]="manga.title | maxLength : 15"
+        [subTitle]="manga?.latestChapter?.name!"
+        (onClick)="showDetailManga(manga)"
+      >
+      </app-inline-card>
+    </ng-container>
+  </ng-container>
+</div>
 <app-main-footer activePage="update"></app-main-footer>

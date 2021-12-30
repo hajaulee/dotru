@@ -1,3 +1,5 @@
+import {SChapter} from "./schapter";
+
 export type ReadingModeEnum = "L2R" | "R2L" | "WEB_TOON"
 export const ReadingModeEnum = {
   L2R: "L2R" as ReadingModeEnum,
@@ -14,5 +16,5 @@ export interface SavedManga {
   sourceName: string;
   readChapters: number[];
   readingMode?: ReadingModeEnum;
-  latestChapterNumber?: number;
+  latestChapter?: SChapter;
 }

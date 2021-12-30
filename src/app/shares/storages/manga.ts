@@ -14,7 +14,7 @@ export function saveManga(manga: SManga) {
     sourceName: manga.source?.name!,
     readChapters: manga.readChapters || [],
     readingMode: manga.readingMode,
-    latestChapterNumber: manga.latestChapterNumber
+    latestChapter: manga.latestChapter
   }
   saveObject(manga.url, dataToSave);
 }
