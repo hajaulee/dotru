@@ -42,6 +42,7 @@ export class UpdatesComponent implements OnInit {
   updateManga() {
     const mangaList = [...this.mangaList];
     let updateCompletedMangaNumber = 0;
+    this.updatedMangaTitle = "...";
     merge(...mangaList.map(manga => {
       const engine = new Engine(manga.source!);
       return engine.getDetailManga(manga);
