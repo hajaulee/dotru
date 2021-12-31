@@ -125,7 +125,7 @@ export const inAppExtensions: Extension[] = [
           .flat()
           .map((chapterObj, chapterNumber) => {
               const name = chapterObj.title;
-              const dateUpload = chapterObj.time;
+              const dateUpload = new Date(chapterObj.time).getTime();
               const relativeUrl = chapterObj.chapter_index;
               const chapter = {relativeUrl, name, dateUpload, chapterNumber};
               return chapter;

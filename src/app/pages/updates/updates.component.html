@@ -12,7 +12,7 @@
     <h4 class="mat-subheading-1">{{mangaList[0]?.latestChapter?.dateUpload! | relativeDate}}</h4>
     <ng-container *ngFor="let manga of mangaList">
       <app-inline-card
-        [badge]="manga.latestChapter?.chapterNumber! - manga.readChapters[0]"
+        [badge]="manga.latestChapter?.chapterNumber! - (manga.readChapters.length > 0 ? manga.readChapters[0]: 0)"
         [iconUrl]="manga.thumbnailUrl"
         [title]="manga.title | maxLength : 15"
         [subTitle]="manga?.latestChapter?.name!"
