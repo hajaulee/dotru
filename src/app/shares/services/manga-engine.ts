@@ -115,7 +115,9 @@ export class Engine {
     detailManga.chapters.forEach((chapter) => {
       chapter.read = Boolean(savedManga.readChapters?.includes(chapter.chapterNumber));
     });
-    detailManga.latestChapter = detailManga.chapters[0];
+    detailManga.latestChapter = detailManga.chapters
+      .sort((a, b) => a.chapterNumber - b.chapterNumber)
+      .reverse()[0];
 
     return {
       ...baseManga,
