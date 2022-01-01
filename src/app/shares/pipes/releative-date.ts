@@ -1,13 +1,15 @@
-import {Pipe, PipeTransform} from "@angular/core";
+import {Injectable, Pipe, PipeTransform} from "@angular/core";
 import {formatDate} from "@angular/common";
 import {dateFormat} from "../constants";
 
 function dateIn0h(date: Date |number): number{
   date = new Date(date);
-  return new Date(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`).getTime();
+  const dateString = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
+  return new Date(dateString).getTime();
 }
 
 @Pipe({name: "relativeDate"})
+@Injectable()
 export class RelativeDatePipe implements PipeTransform {
 
   transform(value: number | Date | undefined, ...args: any[]): any {
