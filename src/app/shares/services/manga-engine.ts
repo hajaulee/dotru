@@ -115,9 +115,12 @@ export class Engine {
     detailManga.chapters.forEach((chapter) => {
       chapter.read = Boolean(savedManga.readChapters?.includes(chapter.chapterNumber));
     });
-    detailManga.latestChapter = detailManga.chapters
+    detailManga.chapters = detailManga.chapters
       .sort((a, b) => a.chapterNumber - b.chapterNumber)
-      .reverse()[0];
+      .reverse();
+    if (detailManga.chapters.length > 0) {
+      detailManga.latestChapter = detailManga.chapters[0];
+    }
 
     return {
       ...baseManga,
@@ -147,7 +150,7 @@ export class Engine {
           }
           // check relative url
           detailManga.chapters.forEach(chapter => {
-            if(chapter.relativeUrl) {
+            if (chapter.relativeUrl) {
               chapter.url = `${manga.url}/${chapter.relativeUrl}`;
             }
           });
