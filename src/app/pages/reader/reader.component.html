@@ -2,7 +2,7 @@
   <app-back-button (onClick)="back()"></app-back-button>
   <div>
     <div class="mat-body-2">{{componentData.manga.title | maxLength: 20 }}</div>
-    <div class="mat-caption">{{chapter.name}}</div>
+    <div class="mat-caption">{{chapter.name | maxLength: 36}}</div>
   </div>
   <div right>
     <button mat-icon-button (click)="refresh()">

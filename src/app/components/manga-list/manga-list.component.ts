@@ -34,7 +34,6 @@ export class MangaListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.hasOwnProperty("mangaList")) {
-      console.log(this.mangaList);
       const newLength = changes.mangaList.currentValue?.length ?? 0;
       const oldLength = changes.mangaList.previousValue?.length ?? 0;
       if (newLength > oldLength) {
