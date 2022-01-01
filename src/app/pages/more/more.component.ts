@@ -39,11 +39,18 @@ export class MoreComponent implements OnInit {
     })
   }
 
+  toggleAutoUpdate(event: MatSlideToggleChange){
+    this.settingsLoader.changeSettings({
+      updateLibraryOnStart: event.checked
+    })
+  }
+
   toggleReadingMode(mode: ReadingModeEnum) {
     this.settingsLoader.changeSettings({
       defaultReadingMode: mode
     })
   }
+
 
   gotoRepo(){
     window.open("https://github.com/hajaulee/dotru", '_blank');

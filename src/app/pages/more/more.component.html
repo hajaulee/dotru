@@ -32,6 +32,17 @@
     </mat-slide-toggle>
   </app-inline-card>
   <app-inline-card
+    matIcon="update"
+    title="Update manga"
+    subTitle="Update manga library on start"
+  >
+    <mat-slide-toggle
+      color="primary"
+      [checked]="settingsLoader.settings.updateLibraryOnStart"
+      (change)="toggleAutoUpdate($event)">
+    </mat-slide-toggle>
+  </app-inline-card>
+  <app-inline-card
     [matIcon]="settingsLoader.settings.defaultReadingMode == readingModeEnum.L2R ? 'swipe_right_alt' :
     settingsLoader.settings.defaultReadingMode == readingModeEnum.R2L ? 'swipe_left_alt': 'swipe_down_alt' "
     title="Reading mode"

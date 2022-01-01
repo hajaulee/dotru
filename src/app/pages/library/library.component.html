@@ -1,5 +1,13 @@
-<app-header><span>Library</span></app-header>
+<app-header>
+  <span>Library</span>
+  <div right>
+    <button mat-icon-button (click)="updateManga()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</app-header>
 <div class="content">
+    <span class="mat-caption" *ngIf="updatedMangaTitle">Updated: {{updatedMangaTitle}}</span>
   <app-manga-list
     [mangaList]="mangaList"
     [showLoadMore]="false"

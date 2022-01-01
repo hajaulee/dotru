@@ -7,6 +7,7 @@ export function loadSettings(): AppSettings {
   const defaultSettings: AppSettings = {
     darkMode: true,
     logHistory: true,
+    updateLibraryOnStart: true,
     defaultReadingMode: ReadingModeEnum.WEB_TOON
   }
   const savedSettings = loadObject(KeySettings, {});

@@ -24,6 +24,7 @@ export class ScreenTransmission {
   private nextScreen$ = new ReplaySubject<ScreenTransmissionData>(1);
   private portalHistory: StateHistory[] = [];
   private maxHistoryLength = 10;
+  private startScreen = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,11 +51,16 @@ export class ScreenTransmission {
       });
   }
 
+  isStartScreen(){
+    return this.startScreen;
+  }
+
   getNextScreen(): Observable<ScreenTransmissionData> {
     return this.nextScreen$;
   }
 
   goToScreen(component: ComponentType<any>, componentData: any) {
+    this.startScreen = false;
     this.nextScreen$.next({component, componentData});
     this.navigate();
   }
