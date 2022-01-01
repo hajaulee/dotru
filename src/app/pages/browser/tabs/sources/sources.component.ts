@@ -20,7 +20,6 @@ export class SourcesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("init");
     const allExts: Extension[] = loadAllExtensions();
     this.sources = allExts.map(initSourceFromExtension);
   }
