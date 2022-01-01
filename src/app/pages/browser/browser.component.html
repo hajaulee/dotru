@@ -1,8 +1,13 @@
 <app-header>
   <span>Browser</span>
+    <div right>
+    <button mat-icon-button (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
 </app-header>
 <div class="content">
-  <mat-tab-group [(selectedIndex)]="activeTab">
+  <mat-tab-group [(selectedIndex)]="activeTab" *ngIf="loaded">
     <mat-tab label="Sources">
       <app-sources></app-sources>
     </mat-tab>
