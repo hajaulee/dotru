@@ -2,10 +2,11 @@
   <button mat-icon-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
   <span>Code</span>
 </app-header>
-<div style="text-align: center">
-  <textarea [(ngModel)]="code" placeholder="Javascript code" style="width: 90%; height: 300px"></textarea>
+<div style="text-align: center;height: calc(100% - 200px)">
+  <textarea [(ngModel)]="code" placeholder="Javascript code" style="width: 90%; height: 90%"></textarea>
 </div>
 <div class="button-group" style="text-align: center">
   <button mat-button mat-raised-button (click)="back()">Cancel</button>
-  <button mat-button mat-raised-button color="primary" (click)="loadCode()">Load</button>
+  <button mat-button mat-raised-button (click)="loadCode()">Load</button>
+  <button mat-button mat-raised-button color="primary" (click)="loadAndExit()">Load & Exit</button>
 </div>

@@ -31,7 +31,7 @@ export class AddCodeComponent implements OnInit {
     this.code = this.componentData.code;
   }
 
-  loadCode() {
+  loadCode(): boolean {
     try {
       const Func = eval("(" + this.code + ")");
       const parser = new Func();
@@ -50,12 +50,19 @@ export class AddCodeComponent implements OnInit {
         fromCodeExts.push(extToSave);
         saveFromCodeExtensions(fromCodeExts);
         alert("Load code successful");
-        this.back();
+        return true;
       } else {
         alert("Same name extension already installed.");
       }
     } catch (e) {
       alert("Load code fail")
+    }
+    return false;
+  }
+
+  loadAndExit() {
+    if (this.loadCode()) {
+      this.back()
     }
   }
 
