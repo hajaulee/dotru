@@ -112,8 +112,17 @@ export class Engine {
   updateMangaReadStatus(baseManga: SManga, detailManga: SManga): SManga {
     detailManga.inLibrary = loadLibraryMangaList().includes(baseManga.url);
     const savedManga = loadSavedManga(baseManga.url);
-    detailManga.chapters.forEach((chapter) => {
+
+    // sort by date
+    detailManga.chapters = detailManga.chapters
+      .sort((a, b) => a.dateUpload - b.dateUpload)
+      .reverse();
+
+    detailManga.chapters.forEach((chapter, index) => {
       chapter.read = Boolean(savedManga.readChapters?.includes(chapter.chapterNumber));
+      if (!Number.isInteger(chapter.chapterNumber)){
+        chapter.chapterNumber = detailManga.chapters.length - index - 1;
+      }
     });
     detailManga.chapters = detailManga.chapters
       .sort((a, b) => a.chapterNumber - b.chapterNumber)

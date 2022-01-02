@@ -21,6 +21,7 @@ export function saveManga(manga: SManga) {
 
 export function loadSavedManga(url: string): SManga {
   const savedData: SavedManga = loadObject(url, {});
+  savedData.readChapters = savedData.readChapters ?? [];
   const ext = loadAllExtensions().find(e => e.name == savedData.sourceName);
   const source = ext && initSourceFromExtension(ext);
   const libraryMangaList = loadLibraryMangaList();
