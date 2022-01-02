@@ -159,6 +159,7 @@ export class Engine {
         }
       ),
       catchError((err) => {
+        console.log(err);
         return of({
           ...manga,
           author: "UNKNOWN",
