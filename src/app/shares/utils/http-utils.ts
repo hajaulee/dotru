@@ -1,14 +1,34 @@
 import {Observable} from "rxjs";
 import {PROXY_URL} from "../constants";
 
-export  function httpGetAsync(url: string, useProxy=true): Observable<string> {
+export type ContentType = 'text' | 'base64';
+
+export interface ProxyParams {
+  contentType?: ContentType,
+  tryTime?: number;
+  minLength?: number;
+  cacheTime?: number;
+}
+
+export  function httpGetAsync(url: string, useProxy=true, proxyParams: ProxyParams = {}, headers: {[k:string]:string} = {}): Observable<string> {
     return new Observable<string>(subscriber => {
       const xmlHttp = new XMLHttpRequest();
       xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
           subscriber.next(xmlHttp.responseText);
+          subscriber.complete();
+        }
       }
-      xmlHttp.open("GET", (useProxy ? PROXY_URL: "") + url, true);
+      if (useProxy){
+        url = `${PROXY_URL}?url=${encodeURIComponent(url)}`;
+        Object.keys(proxyParams).forEach(key => {
+          url += `&${key}=${(proxyParams as any)[key]}`;
+        });
+        Object.keys(headers).forEach(key => {
+          url += `&${key}=${headers[key]}`;
+        });
+      }
+      xmlHttp.open("GET", url, true);
       xmlHttp.send(null);
     });
   }

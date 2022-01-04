@@ -10,6 +10,7 @@ import {Engine} from "../../shares/services/manga-engine";
 import {isSavedManga, saveManga} from "../../shares/storages/manga";
 import {AppSettingsLoader} from "../../shares/injectable/app-settings-loader";
 import {ReadingModeEnum} from "../../shares/models/saved-manga";
+import {httpGetAsync} from "../../shares/utils/http-utils";
 
 export interface ReaderComponentData {
   manga: SManga;
@@ -67,6 +68,20 @@ export class ReaderComponent implements OnInit {
         this.pages$.next(pages);
         this.currentPages = pages;
       });
+  }
+
+  tryLoadImageViaProxy(event: any){
+    if (!event.target.src.startsWith('data')) {
+      console.log("trying to reload image via proxy");
+      httpGetAsync(
+        event.target.src,
+        true,
+        {contentType: 'base64'},
+        this.engine.source.parser.headerBuilder()
+      ).subscribe((data) => {
+        event.target.src = "data:image/png;base64, " + data;
+      })
+    }
   }
 
   back() {

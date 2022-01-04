@@ -77,7 +77,6 @@ export class PopularMangaListPageComponent implements OnInit {
         this.mangaList$.next(this.componentData.source.loadedSearchMangaList);
       }
       setTimeout(() => {
-        console.log(this.searchInput);
         this.searchInput?.nativeElement.focus();
       }, );
     } else {

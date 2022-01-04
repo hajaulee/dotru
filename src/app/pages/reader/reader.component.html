@@ -23,7 +23,7 @@
                (click)="readingPageIndex = i;pageClick($event)"
                (wheel)="readingPageIndex = i"
           >
-            <img src="{{page.url}}" alt="{{page.name}}"/>
+            <img (error)="tryLoadImageViaProxy($event)" src="{{page.url}}" alt="{{page.name}}"/>
           </div>
         </ng-container>
       </ng-container>
@@ -31,7 +31,7 @@
         <div class="page-container-one-page"
              (click)="pageClick($event)"
              >
-          <img src="{{pages[readingPageIndex].url}}" alt="{{pages[readingPageIndex].name}}"/>
+          <img (error)="tryLoadImageViaProxy($event)" src="{{pages[readingPageIndex].url}}" alt="{{pages[readingPageIndex].name}}"/>
         </div>
       </ng-container>
       <div *ngIf="!fullscreen" class="page-jump-container">

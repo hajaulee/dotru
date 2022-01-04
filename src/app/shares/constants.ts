@@ -9,7 +9,7 @@ export const KeySettings = "KeySettings";
 
 export const maxHistoryLength = 30;
 
-export const PROXY_URL = "https://script.google.com/macros/s/AKfycbznYb4dcHRUQF5kk2ZA4DayEPePqLYxCfMj4drt6KrHdJ__uv_rp4vc-C7VSJcChbPr/exec?url=";
+export const PROXY_URL = "https://script.google.com/macros/s/AKfycbxrjKIejaB-KGISRrdGkMgOIBwNQWMZGJJiSFp6AfMNGfn4z8uHCCZk_q-H_3CQ5fB_/exec";
 export const EXTENSIONS_UPDATE_URL = "https://raw.githubusercontent.com/hajaulee/dotru-extensions/main/extensions.json";
 
 export const inAppExtensions: Extension[] = [
