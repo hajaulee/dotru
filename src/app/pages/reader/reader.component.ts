@@ -76,6 +76,7 @@ export class ReaderComponent implements OnInit {
       httpGetAsync(
         event.target.src,
         true,
+        true,
         {contentType: 'base64'},
         this.engine.source.parser.headerBuilder()
       ).subscribe((data) => {

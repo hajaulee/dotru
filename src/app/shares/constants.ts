@@ -11,6 +11,7 @@ export const maxHistoryLength = 30;
 
 export const PROXY_URL = "https://script.google.com/macros/s/AKfycbxrjKIejaB-KGISRrdGkMgOIBwNQWMZGJJiSFp6AfMNGfn4z8uHCCZk_q-H_3CQ5fB_/exec";
 export const EXTENSIONS_UPDATE_URL = "https://raw.githubusercontent.com/hajaulee/dotru-extensions/main/extensions.json";
+export const RESOURCE_CACHE = "RESOURCE_CACHE";
 
 export const inAppExtensions: Extension[] = [
     {
