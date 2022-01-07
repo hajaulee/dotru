@@ -113,14 +113,10 @@ export class Engine {
     detailManga.inLibrary = loadLibraryMangaList().includes(baseManga.url);
     const savedManga = loadSavedManga(baseManga.url);
 
-    // sort by date
-    detailManga.chapters = detailManga.chapters
-      .sort((a, b) => a.dateUpload - b.dateUpload)
-      .reverse();
-
     detailManga.chapters.forEach((chapter, index) => {
       chapter.read = Boolean(savedManga.readChapters?.includes(chapter.chapterNumber));
       if (!Number.isInteger(chapter.chapterNumber)){
+        // assume that default order is new to old
         chapter.chapterNumber = detailManga.chapters.length - index - 1;
       }
     });
