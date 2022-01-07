@@ -156,7 +156,7 @@ export class Engine {
           // check relative url
           detailManga.chapters.forEach(chapter => {
             if (chapter.relativeUrl) {
-              chapter.url = new URL(chapter.relativeUrl, manga.url).href;
+              chapter.url = new URL(chapter.relativeUrl, manga.url + (manga.url.endsWith("/") ? "":"/")).href;
             }
           });
           this.source.loadedManga = this.updateMangaReadStatus(manga, detailManga);
