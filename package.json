@@ -23,7 +23,10 @@
     "@angular/router": "~12.2.0",
     "@ngx-loading-bar/core": "^6.0.0",
     "@trademe/ng-defer-load": "^8.2.1",
+    "codejar": "^3.4.0",
+    "highlight.js": "^11.4.0",
     "ng-readmore": "^1.0.0",
+    "ngx-codejar": "^1.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -32,6 +35,7 @@
     "@angular-devkit/build-angular": "~12.2.4",
     "@angular/cli": "~12.2.4",
     "@angular/compiler-cli": "~12.2.0",
+    "@types/highlight.js": "^10.1.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.8.0",

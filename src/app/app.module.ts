@@ -54,6 +54,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatMenuModule} from "@angular/material/menu";
 import { CornerCoverComponent } from './components/corner-cover/corner-cover.component';
 import {MatBadgeModule} from "@angular/material/badge";
+import {NgxCodejarModule} from "ngx-codejar";
 
 
 @NgModule({
@@ -89,34 +90,35 @@ import {MatBadgeModule} from "@angular/material/badge";
     LatestMangaListPageComponent,
     CornerCoverComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatTabsModule,
-    MatTabGroupGestureModule,
-    FormsModule,
-    MatRippleModule,
-    MatGridListModule,
-    MatProgressSpinnerModule,
-    PortalModule,
-    ReadMoreModule,
-    MatChipsModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatDividerModule,
-    MatInputModule,
-    LoadingBarModule,
-    DeferLoadModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatMenuModule,
-    MatBadgeModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatTabsModule,
+        MatTabGroupGestureModule,
+        FormsModule,
+        MatRippleModule,
+        MatGridListModule,
+        MatProgressSpinnerModule,
+        PortalModule,
+        ReadMoreModule,
+        MatChipsModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatDividerModule,
+        MatInputModule,
+        LoadingBarModule,
+        DeferLoadModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatMenuModule,
+        MatBadgeModule,
+        NgxCodejarModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

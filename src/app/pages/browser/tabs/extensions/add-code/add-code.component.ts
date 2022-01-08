@@ -7,6 +7,8 @@ import {
   loadFromCodeExtensions,
   saveFromCodeExtensions
 } from "../../../../../shares/storages/extensions";
+import hljs from 'highlight.js';
+import {CodeJarContainer} from "ngx-codejar";
 
 export interface AddCodeComponentDate {
   code: string;
@@ -29,6 +31,14 @@ export class AddCodeComponent implements OnInit {
 
   ngOnInit(): void {
     this.code = this.componentData.code;
+  }
+
+  highlightMethod(editor: CodeJarContainer) {
+    if (editor.textContent !== null && editor.textContent !== undefined) {
+      editor.innerHTML = hljs.highlight(editor.textContent, {
+        language: 'javascript'
+      }).value;
+    }
   }
 
   loadCode(): boolean {
@@ -55,7 +65,8 @@ export class AddCodeComponent implements OnInit {
         alert("Same name extension already installed.");
       }
     } catch (e) {
-      alert("Load code fail")
+      alert("Load code fail\n" + e);
+      console.log(e);
     }
     return false;
   }

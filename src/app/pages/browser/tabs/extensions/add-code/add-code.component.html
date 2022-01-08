@@ -1,9 +1,13 @@
 <app-header>
-  <button mat-icon-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+  <button mat-icon-button (click)="back()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
   <span>Code</span>
 </app-header>
-<div style="text-align: center;height: calc(100% - 200px)">
-  <textarea [(ngModel)]="code" placeholder="Javascript code" style="width: 90%; height: 90%"></textarea>
+<div class="content" style="display: flex;overflow: scroll;">
+  <div style="width: 90%; margin: auto">
+    <ngx-codejar [highlightMethod]="highlightMethod" [(code)]="code" [showLineNumbers]="true"></ngx-codejar>
+  </div>
 </div>
 <div class="button-group" style="text-align: center">
   <button mat-button mat-raised-button (click)="back()">Cancel</button>
