@@ -39,7 +39,7 @@ export function httpGetAsync(url: string, useProxy = true, useCache: boolean = f
 
   return new Observable<string>(subscriber => {
 
-    if ('caches' in window) {
+    if ('caches' in window && useCache) {
       caches.open(RESOURCE_CACHE).then(cache => {
         cache.match(url).then(cached => {
           if (cached) {
