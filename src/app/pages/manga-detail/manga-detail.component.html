@@ -24,7 +24,7 @@
     <div class="button-icon-group">
       <app-icon-button *ngIf="!manga.inLibrary" icon="favorite_border" label="Add to Library"
                        (click)="addToLibrary(manga)"></app-icon-button>
-      <app-icon-button *ngIf="manga.inLibrary" icon="favorite" label="In library"
+      <app-icon-button *ngIf="manga.inLibrary" color="primary" icon="favorite" label="In library"
                        (click)="removeFromLibrary(manga)"></app-icon-button>
       <app-icon-button icon="public" label="Webview" (click)="goToMangaWebView()"></app-icon-button>
     </div>
