@@ -26,13 +26,8 @@ export class ReloadViaProxyOnErrorDirective {
 
   tryLoadImageViaProxy(event: any) {
     const originalSrc = event.target.src;
-    const originalStyle = {...event.target.style};
     event.target.src = spinnerBase64;
-    event.target.style.width = "unset";
-    event.target.style.height = "unset";
-    event.target.style.margin = "auto";
-    event.target.style.top = "0";
-    event.target.style.right = "0";
+    event.target.classList.add("loading-spinner-img");
     if (!originalSrc.startsWith('data')) {
       console.log("trying to reload image via proxy");
       httpGetAsync(
@@ -43,11 +38,7 @@ export class ReloadViaProxyOnErrorDirective {
         this.headers
       ).subscribe((data) => {
         event.target.src = "data:image/png;base64, " + data;
-        event.target.style.width = originalStyle.width;
-        event.target.style.height = originalStyle.height;
-        event.target.style.margin = originalStyle.margin;
-        event.target.style.top = originalStyle.top;
-        event.target.style.right = originalStyle.right;
+        event.target.classList.remove("loading-spinner-img");
       })
     }
   }
