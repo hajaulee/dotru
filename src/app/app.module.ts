@@ -55,6 +55,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import { CornerCoverComponent } from './components/corner-cover/corner-cover.component';
 import {MatBadgeModule} from "@angular/material/badge";
 import {NgxCodejarModule} from "ngx-codejar";
+import { ReloadViaProxyOnErrorDirective } from './shares/directives/reload-via-proxy-on-error.directive';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import {NgxCodejarModule} from "ngx-codejar";
     ReaderComponent,
     InlineCardComponent,
     LatestMangaListPageComponent,
-    CornerCoverComponent
+    CornerCoverComponent,
+    ReloadViaProxyOnErrorDirective
   ],
     imports: [
         BrowserModule,

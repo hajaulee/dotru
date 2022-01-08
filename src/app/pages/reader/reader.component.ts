@@ -70,21 +70,6 @@ export class ReaderComponent implements OnInit {
       });
   }
 
-  tryLoadImageViaProxy(event: any){
-    if (!event.target.src.startsWith('data')) {
-      console.log("trying to reload image via proxy");
-      httpGetAsync(
-        event.target.src,
-        true,
-        true,
-        {contentType: 'base64'},
-        this.engine.source.parser.headerBuilder()
-      ).subscribe((data) => {
-        event.target.src = "data:image/png;base64, " + data;
-      })
-    }
-  }
-
   back() {
     this.screenTransmission.back();
   }
