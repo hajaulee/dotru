@@ -12,7 +12,7 @@
 <div class="content-no-footer">
   <ng-container *ngIf="detailManga$ | async as manga; else loading">
     <div class="flex-row">
-      <img src="{{manga.thumbnailUrl }}" alt="{{manga.title}}" style="width: 80px;"/>
+      <img reloadViaProxyOnError [headers]="engine.source.parser.headerBuilder()" src="{{manga.thumbnailUrl }}" alt="{{manga.title}}" style="width: 80px;"/>
       <div style="padding-left: 10px;">
         <div class="mat-body-2">{{manga.title | maxLength: 36}}</div>
         <div class="mat-caption">{{manga.author}}</div>
