@@ -21,58 +21,78 @@ export class Engine {
     this.source = source
   }
 
-  getPopularMangaList(loadMore: boolean = true): Observable<SManga[]> {
 
-    if (!loadMore && this.source.loadedPopularMangaList && this.source.loadedPopularMangaList.length > 0) {
-      return of(this.source.loadedPopularMangaList);
+  getMangaList(
+    loadedMangaList: 'loadedLatestMangaList' | 'loadedPopularMangaList' | 'loadedSearchMangaList',
+    pageIndex: 'latestPageIndex' | 'popularPageIndex' | 'searchPageIndex',
+    request: 'latestUpdatesRequest' | 'popularMangaRequest' | 'searchMangaRequest',
+    mangaParse: 'latestMangaParse' | 'popularMangaParse' | 'searchMangaParse',
+    selector: 'latestUpdatesSelector' | 'popularMangaSelector' | 'searchMangaSelector',
+    mangaFromElement: 'latestUpdatesFromElement' | 'popularMangaFromElement' | 'searchMangaFromElement',
+    query: string = '',
+    filters: FilterList = {},
+    loadMore: boolean = true
+  ): Observable<SManga[]> {
+
+    if (!loadMore && this.source[loadedMangaList] && this.source[loadedMangaList].length > 0) {
+      return of(this.source[loadedMangaList]);
     }
-
-    return httpGetAsync(this.source.parser.popularMangaRequest(this.source.popularPageIndex))
+    let requestUrl = '';
+    if (request === 'searchMangaRequest'){
+      requestUrl = this.source.parser[request](this.source[pageIndex], query, filters)
+    }else{
+      requestUrl = this.source.parser[request](this.source[pageIndex]);
+    }
+    return httpGetAsync(requestUrl)
       .pipe(
         map((text) => {
-          console.log("parsing:" + this.source.parser.popularMangaRequest(this.source.popularPageIndex));
+          console.log("parsing:" + requestUrl);
           let newMangaList: SManga[] = [];
           const domParser = new DOMParser();
           const doc = domParser.parseFromString(text, 'text/html');
-          if (this.source.parser.popularMangaParse) {
-            newMangaList = this.source.parser.popularMangaParse(doc);
+          if (this.source.parser[mangaParse]) {
+            newMangaList = this.source.parser[mangaParse]!(doc);
           } else {
-            doc.querySelectorAll(this.source.parser.popularMangaSelector()).forEach((ele) => {
-              newMangaList.push(this.source.parser.popularMangaFromElement(ele));
+            doc.querySelectorAll(this.source.parser[selector]()).forEach((ele) => {
+              newMangaList.push(this.source.parser[mangaFromElement](ele));
             });
           }
           if (newMangaList.length > 0) {
-            this.source.loadedPopularMangaList.push(...newMangaList);
-            this.source.popularPageIndex += 1;
+            this.source[loadedMangaList].push(...newMangaList);
+            this.source[pageIndex] += 1;
           }
-          return [...this.source.loadedPopularMangaList];
+          return [...this.source[loadedMangaList]];
         })
       );
   }
 
+  getPopularMangaList(loadMore: boolean = true): Observable<SManga[]> {
+
+    return this.getMangaList(
+      'loadedPopularMangaList',
+      'popularPageIndex',
+      'popularMangaRequest',
+      'popularMangaParse',
+      'popularMangaSelector',
+      'popularMangaFromElement',
+      '',
+      {},
+      loadMore
+    )
+  }
+
   getLatestMangaList(loadMore: boolean = true): Observable<SManga[]> {
-
-    if (!loadMore && this.source.loadedLatestMangaList && this.source.loadedLatestMangaList.length > 0) {
-      return of(this.source.loadedLatestMangaList);
-    }
-
-    return httpGetAsync(this.source.parser.latestUpdatesRequest(this.source.latestPageIndex))
-      .pipe(
-        map((text) => {
-          console.log("parsing:" + this.source.parser.latestUpdatesRequest(this.source.latestPageIndex));
-          const newMangaList: SManga[] = [];
-          const domParser = new DOMParser();
-          const doc = domParser.parseFromString(text, 'text/html');
-          doc.querySelectorAll(this.source.parser.latestUpdatesSelector()).forEach((ele) => {
-            newMangaList.push(this.source.parser.latestUpdatesFromElement(ele));
-          });
-          if (newMangaList.length > 0) {
-            this.source.loadedLatestMangaList.push(...newMangaList);
-            this.source.latestPageIndex += 1;
-          }
-          return [...this.source.loadedLatestMangaList];
-        })
-      );
+    return this.getMangaList(
+      'loadedLatestMangaList',
+      'latestPageIndex',
+      'latestUpdatesRequest',
+      'latestMangaParse',
+      'latestUpdatesSelector',
+      'latestUpdatesFromElement',
+      '',
+      {},
+      loadMore
+    )
   }
 
   getSearchMangaList(query: string, filters: FilterList, loadMore: boolean = true): Observable<SManga[]> {
@@ -84,29 +104,17 @@ export class Engine {
       this.source.loadedSearchMangaList = [];
     }
 
-    if (!loadMore && this.source.loadedSearchMangaList && this.source.loadedSearchMangaList.length > 0) {
-      return of(this.source.loadedSearchMangaList);
-    }
-
-    return httpGetAsync(this.source.parser.searchMangaRequest(this.source.searchPageIndex, query, {}))
-      .pipe(
-        map((text) => {
-          console.log("parsing:" +
-            this.source.parser.searchMangaRequest(this.source.searchPageIndex, query, {})
-          );
-          const newMangaList: SManga[] = [];
-          const domParser = new DOMParser();
-          const doc = domParser.parseFromString(text, 'text/html');
-          doc.querySelectorAll(this.source.parser.searchMangaSelector()).forEach((ele) => {
-            newMangaList.push(this.source.parser.searchMangaFromElement(ele));
-          });
-          if (newMangaList.length > 0) {
-            this.source.loadedSearchMangaList.push(...newMangaList);
-            this.source.searchPageIndex += 1;
-          }
-          return [...this.source.loadedSearchMangaList];
-        })
-      );
+    return this.getMangaList(
+      'loadedSearchMangaList',
+      'searchPageIndex',
+      'searchMangaRequest',
+      'searchMangaParse',
+      'searchMangaSelector',
+      'searchMangaFromElement',
+      query,
+      filters,
+      loadMore
+    )
   }
 
   updateMangaReadStatus(baseManga: SManga, detailManga: SManga): SManga {
@@ -115,7 +123,7 @@ export class Engine {
 
     detailManga.chapters.forEach((chapter, index) => {
       chapter.read = Boolean(savedManga.readChapters?.includes(chapter.chapterNumber));
-      if (!Number.isInteger(chapter.chapterNumber)){
+      if (!Number.isInteger(chapter.chapterNumber)) {
         // assume that default order is new to old
         chapter.chapterNumber = detailManga.chapters.length - index - 1;
       }
@@ -156,7 +164,7 @@ export class Engine {
           // check relative url
           detailManga.chapters.forEach(chapter => {
             if (chapter.relativeUrl) {
-              chapter.url = new URL(chapter.relativeUrl, manga.url + (manga.url.endsWith("/") ? "":"/")).href;
+              chapter.url = new URL(chapter.relativeUrl, manga.url + (manga.url.endsWith("/") ? "" : "/")).href;
             }
           });
           this.source.loadedManga = this.updateMangaReadStatus(manga, detailManga);

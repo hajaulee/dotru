@@ -32,6 +32,7 @@ export class BaseParser {
   searchMangaRequest: (page: number, query: string, filters: FilterList) => string;
   searchMangaNextPageSelector: () => string;
   searchMangaSelector: () => string;
+  searchMangaParse?: (doc: any) => SManga[];
   searchMangaFromElement: (element: any) => SManga;
 
   // Detail
