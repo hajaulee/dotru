@@ -55,9 +55,24 @@ export class LibraryComponent implements OnInit {
       updateCompletedMangaNumber++;
       if (updateCompletedMangaNumber == mangaList.length) {
         this.updatedMangaTitle = "Updated all!";
+        new Notification("Updated all!");
         setTimeout(() => this.updatedMangaTitle = undefined, 2000);
       }
+
+      if (Math.max(...detailManga.readChapters) != detailManga.chapters[0].chapterNumber){
+        this.notifyUnreadChapter(detailManga.title, detailManga.chapters[0]?.name);
+      }
     });
+  }
+
+  notifyUnreadChapter(mangaTitle: string, chapterTitle: string){
+    if (Notification.permission === 'granted') {
+      new Notification(mangaTitle, {
+          body: chapterTitle,
+          vibrate: [1]
+        }
+      );
+    }
   }
 
 }

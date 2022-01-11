@@ -8,6 +8,14 @@
   </div>
   <hr/>
   <app-inline-card
+    *ngIf="!notificationPermissionGranted"
+    matIcon="notifications_active"
+    title="Notification permission"
+    subTitle="Grant notification permission..."
+    (onClick)="requestNotificationPermission()"
+  >
+  </app-inline-card>
+  <app-inline-card
     matIcon="brightness_6"
     title="Dark mode"
     subTitle="Dark mode"
@@ -51,7 +59,7 @@
   >
   </app-inline-card>
   <hr/>
-    <app-inline-card
+  <app-inline-card
     matIcon="people"
     title="Github"
     subTitle="Repository of this project"

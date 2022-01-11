@@ -18,6 +18,8 @@ export class MoreComponent implements OnInit {
   // Enums
   readingModeEnum = ReadingModeEnum;
 
+  notificationPermissionGranted = false;
+
   constructor(
     public settingsLoader: AppSettingsLoader,
     private screenTransmission: ScreenTransmission
@@ -25,6 +27,7 @@ export class MoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.notificationPermissionGranted = Notification.permission === 'granted';
   }
 
   toggleDarkMode(event: MatSlideToggleChange) {
@@ -48,6 +51,12 @@ export class MoreComponent implements OnInit {
   toggleReadingMode(mode: ReadingModeEnum) {
     this.settingsLoader.changeSettings({
       defaultReadingMode: mode
+    })
+  }
+
+  requestNotificationPermission(){
+    Notification.requestPermission().then((permission) => {
+      this.notificationPermissionGranted = permission === 'granted';
     })
   }
 
