@@ -15,7 +15,7 @@ function increaseVersionNumber(version) {
 }
 const options = {
     files: 'src/environments/environment.prod.ts',
-    from: /v\d.\d.\d.\d*/g,
+    from: /v\d+.\d+.\d+.\d+/g,
     to: (match) => increaseVersionNumber(match),
     allowEmptyPaths: false,
 };
