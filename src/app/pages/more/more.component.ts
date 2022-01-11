@@ -27,7 +27,9 @@ export class MoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.notificationPermissionGranted = Notification.permission === 'granted';
+    if ('Notification' in window) {
+      this.notificationPermissionGranted = Notification.permission === 'granted';
+    }
   }
 
   toggleDarkMode(event: MatSlideToggleChange) {
@@ -55,9 +57,12 @@ export class MoreComponent implements OnInit {
   }
 
   requestNotificationPermission(){
-    Notification.requestPermission().then((permission) => {
+    const callback = (permission: NotificationPermission) => {
       this.notificationPermissionGranted = permission === 'granted';
-    })
+    }
+    if ('Notification' in window) {
+      Notification.requestPermission(callback).then(callback);
+    }
   }
 
 

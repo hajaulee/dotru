@@ -55,7 +55,9 @@ export class LibraryComponent implements OnInit {
       updateCompletedMangaNumber++;
       if (updateCompletedMangaNumber == mangaList.length) {
         this.updatedMangaTitle = "Updated all!";
-        new Notification("Updated all!");
+        if ('Notification' in window) {
+          new Notification("Updated all!");
+        }
         setTimeout(() => this.updatedMangaTitle = undefined, 2000);
       }
 
@@ -66,12 +68,14 @@ export class LibraryComponent implements OnInit {
   }
 
   notifyUnreadChapter(mangaTitle: string, chapterTitle: string){
-    if (Notification.permission === 'granted') {
-      new Notification(mangaTitle, {
-          body: chapterTitle,
-          vibrate: [1]
-        }
-      );
+    if ('Notification' in window) {
+      if (Notification.permission === 'granted') {
+        new Notification(mangaTitle, {
+            body: chapterTitle,
+            vibrate: [1]
+          }
+        );
+      }
     }
   }
 
