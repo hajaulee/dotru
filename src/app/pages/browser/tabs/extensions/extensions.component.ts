@@ -13,6 +13,7 @@ import {BehaviorSubject, Observable, ReplaySubject} from "rxjs";
 import {installExtension, loadOnlineExtensions} from "../../../../shares/services/extensions";
 import {ExtensionInfo} from "../../../../shares/models/extension-info";
 import {map, switchMap} from "rxjs/operators";
+import {groupByKey} from "../../../../shares/utils/source-utils";
 
 @Component({
   selector: 'app-extensions',
@@ -22,12 +23,14 @@ import {map, switchMap} from "rxjs/operators";
 export class ExtensionsComponent implements OnInit {
 
   onlineExtensions$: Observable<ExtensionInfo[]>;
+  onlineExtensionsGroupedByLang$: Observable<ExtensionInfo[][]>;
   onlineExtensionsUpdate$ = new BehaviorSubject<any>("init");
   extensionToInstall$ = new ReplaySubject<ExtensionInfo>(1);
 
   fromCodeExtensions: Extension[] = [];
   inAppExtensions = inAppExtensions;
   installedExtensions: Extension[] = [];
+  installedExtensionsGroupedByLang: Extension[][] = [];
 
 
   constructor(private screenTransmission: ScreenTransmission) {
@@ -55,6 +58,9 @@ export class ExtensionsComponent implements OnInit {
           return arr;
         }, [] as ExtensionInfo[]);
       }))));
+    this.onlineExtensionsGroupedByLang$ = this.onlineExtensions$.pipe(
+      map((extensionInfos) => groupByKey(extensionInfos, 'lang'))
+    );
 
     this.extensionToInstall$.pipe(
       switchMap((extInfo) => installExtension(extInfo))
@@ -64,8 +70,11 @@ export class ExtensionsComponent implements OnInit {
       installedExtensions.push(extension);
       saveInstalledExtensions(installedExtensions);
       this.installedExtensions = installedExtensions;
+      this.groupExtensionsByLang();
       this.onlineExtensionsUpdate$.next('installed');
     });
+
+    this.groupExtensionsByLang();
   }
 
   goAddCodePage() {
@@ -78,6 +87,10 @@ export class ExtensionsComponent implements OnInit {
 
   install(extInfo: ExtensionInfo) {
     this.extensionToInstall$.next(extInfo);
+  }
+
+  groupExtensionsByLang() {
+    this.installedExtensionsGroupedByLang = groupByKey(this.installedExtensions, 'lang');
   }
 
 }

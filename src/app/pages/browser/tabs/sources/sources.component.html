@@ -1,7 +1,11 @@
 <h3 class="mat-subheading-2">SOURCE</h3>
-<ng-container *ngFor="let source of sources">
-  <app-extension-card [extension]="source" [showVersion]="false" (click)="showPopularMangaList($event)">
-    <button *ngIf="source.parser.supportsLatest" mat-button color="primary" (click)="showLatestMangaList(source)">Latest</button>
-  </app-extension-card>
+<ng-container *ngFor="let group of sourcesGroupedByLang">
+  <span class="mat-subheading-1">{{group[0].lang | langName}}</span>
+  <ng-container *ngFor="let source of group">
+    <app-extension-card [extension]="source" [showVersion]="false" (click)="showPopularMangaList($event)">
+      <button *ngIf="source.parser.supportsLatest" mat-button color="primary"
+              (click)="showLatestMangaList(source)">Latest
+      </button>
+    </app-extension-card>
+  </ng-container>
 </ng-container>
-

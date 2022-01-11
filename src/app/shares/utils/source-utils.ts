@@ -2,7 +2,17 @@ import {Extension} from "../models/extension";
 import {Source} from "../models/source";
 
 
-export const initSourceFromExtension = (ext: Extension): Source => {
+export function groupByKey<Type>(exts: Array<Type>, key: string): Array<Array<Type>> {
+    const keyObjectsMap = exts.reduce((_map, it ) => {
+      const _it = it as any;
+      _map[_it[key]] = _map[_it[key]] || [];
+      _map[_it[key]].push(_it);
+      return _map;
+    }, {} as {[k: string]: Array<Type>});
+    return Object.keys(keyObjectsMap).map(k => keyObjectsMap[k]);
+}
+
+export function initSourceFromExtension(ext: Extension): Source {
   const Parser = eval("(" + ext.sourceCode + ")");
   const parser = new Parser();
   return {

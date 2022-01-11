@@ -4,7 +4,7 @@ import {Source} from "../../../../shares/models/source";
 import {ScreenTransmission} from "../../../../shares/injectable/screen-transmission";
 import {Extension} from "../../../../shares/models/extension";
 import {loadAllExtensions} from "../../../../shares/storages/extensions";
-import {initSourceFromExtension} from "../../../../shares/utils/source-utils";
+import {groupByKey, initSourceFromExtension} from "../../../../shares/utils/source-utils";
 import {LatestMangaListPageComponent} from "./latest-manga-list-page/latest-manga-list-page.component";
 
 @Component({
@@ -15,6 +15,7 @@ import {LatestMangaListPageComponent} from "./latest-manga-list-page/latest-mang
 export class SourcesComponent implements OnInit {
 
   sources: Source[];
+  sourcesGroupedByLang: Source[][] = []
 
   constructor(private screenTransmission: ScreenTransmission) {
   }
@@ -22,6 +23,11 @@ export class SourcesComponent implements OnInit {
   ngOnInit(): void {
     const allExts: Extension[] = loadAllExtensions();
     this.sources = allExts.map(initSourceFromExtension);
+    this.groupSourcesByLang();
+  }
+
+  groupSourcesByLang() {
+    this.sourcesGroupedByLang = groupByKey(this.sources, 'lang');
   }
 
   showPopularMangaList(source: any) {

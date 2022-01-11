@@ -19,22 +19,28 @@
 </div>
 <hr/>
 <h3 class="mat-subheading-2">INSTALLED</h3>
-<ng-container *ngFor="let ext of installedExtensions">
-  <app-extension-card [extension]="ext">
-    <button mat-button color="primary" (click)="goSettings(ext)">Settings</button>
-  </app-extension-card>
+<ng-container *ngFor="let group of installedExtensionsGroupedByLang">
+  <span class="mat-subheading-1">{{group[0].lang | langName}}</span>
+  <ng-container *ngFor="let ext of group">
+    <app-extension-card [extension]="ext">
+      <button mat-button color="primary" (click)="goSettings(ext)">Settings</button>
+    </app-extension-card>
+  </ng-container>
 </ng-container>
 <hr/>
 <h3 class="mat-subheading-2">ALL</h3>
-<ng-container *ngIf="onlineExtensions$ | async as onlineExtensions">
-  <ng-container *ngFor="let ext of onlineExtensions">
-    <app-inline-card
-      [badge]="ext.isUpdate? 'update': ''"
-      [iconUrl]="ext.thumbnail"
-      [title]="ext.name"
-      [subTitle]="(ext.lang | langName) + ' - ' + ext.version"
-    >
-      <button mat-button color="primary" (click)="install(ext)">Install</button>
-    </app-inline-card>
+<ng-container *ngIf="onlineExtensionsGroupedByLang$ | async as onlineExtensionsGroupedByLang">
+  <ng-container *ngFor="let group of onlineExtensionsGroupedByLang">
+    <span class="mat-subheading-1">{{group[0].lang | langName}}</span>
+    <ng-container *ngFor="let ext of group">
+      <app-inline-card
+        [badge]="ext.isUpdate? 'update': ''"
+        [iconUrl]="ext.thumbnail"
+        [title]="ext.name"
+        [subTitle]="(ext.lang | langName) + ' - ' + ext.version"
+      >
+        <button mat-button color="primary" (click)="install(ext)">Install</button>
+      </app-inline-card>
+    </ng-container>
   </ng-container>
 </ng-container>
