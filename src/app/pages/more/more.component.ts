@@ -5,6 +5,12 @@ import {AppSettingsLoader} from "../../shares/injectable/app-settings-loader";
 import {environment} from "../../../environments/environment.prod";
 import {ReadingModeEnum} from "../../shares/models/saved-manga";
 import {WebViewComponent} from "../web-view/web-view.component";
+import {
+  getNotificationStatus,
+  isSupportNotification,
+  NotificationStatus,
+  requestNotificationPermission
+} from "../../shares/utils/notification";
 
 @Component({
   selector: 'app-more',
@@ -18,7 +24,28 @@ export class MoreComponent implements OnInit {
   // Enums
   readingModeEnum = ReadingModeEnum;
 
-  notificationPermissionGranted = false;
+  //Constants
+
+  notificationSettingInfo = {
+    granted: {
+      icon: "notifications_active",
+      subTitle: "Notification is active."
+    },
+    denied: {
+      icon: "notifications_off",
+      subTitle: "Notification is stopped."
+    },
+    default: {
+      icon: "notifications",
+      subTitle: "Grant notification permission"
+    },
+    no_support: {
+      icon: "notifications_none",
+      subTitle: "Notification is not supported"
+    },
+  }
+
+  notificationStatus: NotificationStatus;
 
   constructor(
     public settingsLoader: AppSettingsLoader,
@@ -27,9 +54,7 @@ export class MoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if ('Notification' in window) {
-      this.notificationPermissionGranted = Notification.permission === 'granted';
-    }
+    this.notificationStatus = getNotificationStatus();
   }
 
   toggleDarkMode(event: MatSlideToggleChange) {
@@ -58,11 +83,9 @@ export class MoreComponent implements OnInit {
 
   requestNotificationPermission(){
     const callback = (permission: NotificationPermission) => {
-      this.notificationPermissionGranted = permission === 'granted';
+      this.notificationStatus = permission;
     }
-    if ('Notification' in window) {
-      Notification.requestPermission(callback).then(callback);
-    }
+    requestNotificationPermission(callback);
   }
 
 

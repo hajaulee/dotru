@@ -8,10 +8,9 @@
   </div>
   <hr/>
   <app-inline-card
-    *ngIf="!notificationPermissionGranted"
-    matIcon="notifications_active"
-    title="Notification permission"
-    subTitle="Grant notification permission..."
+    [matIcon]="notificationSettingInfo[notificationStatus]?.icon ?? ''"
+    title="Notification"
+    [subTitle]="notificationSettingInfo[notificationStatus]?.subTitle ?? ''"
     (onClick)="requestNotificationPermission()"
   >
   </app-inline-card>
