@@ -1,5 +1,5 @@
-<mat-grid-list cols="3" rowHeight="2:3" gutterSize="0.5em">
-  <mat-grid-tile *ngFor="let manga of mangaList">
+<mat-grid-list [cols]="cols" rowHeight="2:3" gutterSize="0.5em">
+  <mat-grid-tile *ngFor="let manga of mangaList.slice(0, oneRow?cols:undefined )">
     <app-manga-card [badge]="(manga.latestChapter?.chapterNumber ?? 0) - (manga?.readChapters?.length ? manga.readChapters[0]: 0)" [manga]="manga" (click)="mangaClick.emit(manga)"></app-manga-card>
   </mat-grid-tile>
 </mat-grid-list>

@@ -56,6 +56,7 @@ import { CornerCoverComponent } from './components/corner-cover/corner-cover.com
 import {MatBadgeModule} from "@angular/material/badge";
 import {NgxCodejarModule} from "ngx-codejar";
 import { ReloadViaProxyOnErrorDirective } from './shares/directives/reload-via-proxy-on-error.directive';
+import { GlobalSearchPageComponent } from './pages/browser/tabs/sources/global-search-page/global-search-page.component';
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import { ReloadViaProxyOnErrorDirective } from './shares/directives/reload-via-p
     InlineCardComponent,
     LatestMangaListPageComponent,
     CornerCoverComponent,
-    ReloadViaProxyOnErrorDirective
+    ReloadViaProxyOnErrorDirective,
+    GlobalSearchPageComponent
   ],
     imports: [
         BrowserModule,

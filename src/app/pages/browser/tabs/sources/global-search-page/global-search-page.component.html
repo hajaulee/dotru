@@ -1,0 +1,39 @@
+<app-header>
+  <app-back-button (onClick)="back()"></app-back-button>
+  <mat-form-field style="font-size: 12px" *ngIf="searching" class="full-width" appearance="standard">
+    <input
+      #searchInput
+      matInput
+      placeholder="Global search..."
+      (keydown.enter)="applySearch(searchInput.value)"
+      [(ngModel)]="searchQuery"
+    />
+    <button *ngIf="searchQuery" matSuffix mat-icon-button aria-label="Clear" (click)="searchQuery=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <div right>
+    <button *ngIf="!searching" mat-icon-button (click)="toggleSearching(true)">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</app-header>
+<div class="content-no-footer">
+  <ng-container *ngFor="let source of sources">
+    <app-extension-card [extension]="source" [showVersion]="false">
+      <button mat-button mat-icon-button color="primary" (click)="gotoLocalSearch(source)">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </app-extension-card>
+    <app-manga-list
+      *ngIf="source.loadedSearchMangaList.length > 0; else notFound"
+      [mangaList]="source.loadedSearchMangaList"
+      [showLoadMore]="false"
+      [oneRow]="true"
+      (mangaClick)="showDetailManga($event)">
+    </app-manga-list>
+    <br/>
+  </ng-container>
+</div>
+
+<ng-template #notFound>No manga found!😔</ng-template>

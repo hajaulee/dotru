@@ -61,6 +61,7 @@ export class Engine {
             this.source[loadedMangaList].push(...newMangaList);
             this.source[pageIndex] += 1;
           }
+          this.source[loadedMangaList].forEach(manga => manga.source = this.source);
           return [...this.source[loadedMangaList]];
         })
       );

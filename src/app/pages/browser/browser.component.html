@@ -1,13 +1,29 @@
 <app-header>
-  <span>Browser</span>
-    <div right>
+  <span *ngIf="!searching">Browser</span>
+  <app-back-button *ngIf="searching" (onClick)="toggleSearching(false)"></app-back-button>
+  <mat-form-field style="font-size: 12px" *ngIf="searching" class="full-width" appearance="standard">
+    <input
+      #searchInput
+      matInput
+      placeholder="Global search..."
+      (keydown.enter)="gotoGlobalSearch(searchInput.value)"
+      [(ngModel)]="searchQuery"
+    />
+    <button *ngIf="searchQuery" matSuffix mat-icon-button aria-label="Clear" (click)="searchQuery=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <div right>
+    <button *ngIf="!searching && activeTab == 0" mat-icon-button (click)="toggleSearching(true)">
+      <mat-icon>search</mat-icon>
+    </button>
     <button mat-icon-button (click)="refresh()">
       <mat-icon>refresh</mat-icon>
     </button>
   </div>
 </app-header>
 <div class="content">
-  <mat-tab-group [(selectedIndex)]="activeTab" *ngIf="loaded">
+  <mat-tab-group mat-stretch-tabs  [(selectedIndex)]="activeTab" *ngIf="loaded" mat-align-tabs="center">
     <mat-tab label="Sources">
       <app-sources></app-sources>
     </mat-tab>

@@ -29,12 +29,16 @@ export function httpGetAsync(url: string, useProxy = true, useCache: boolean = f
   // TODO use cacheTime instead of useCache
   if (useProxy) {
     url = `${PROXY_URL}?url=${encodeURIComponent(url)}`;
-    Object.keys(proxyParams).forEach(key => {
-      url += `&${key}=${(proxyParams as any)[key]}`;
-    });
-    Object.keys(headers).forEach(key => {
-      url += `&${key}=${headers[key]}`;
-    });
+    if (proxyParams) {
+      Object.keys(proxyParams).forEach(key => {
+        url += `&${key}=${(proxyParams as any)[key]}`;
+      });
+    }
+    if (headers) {
+      Object.keys(headers).forEach(key => {
+        url += `&${key}=${headers[key]}`;
+      });
+    }
   }
 
   return new Observable<string>(subscriber => {

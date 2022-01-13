@@ -18,6 +18,7 @@ export class MangaListComponent implements OnInit, OnChanges {
 
   @Input() mangaList: SManga[];
   @Input() showLoadMore = true;
+  @Input() oneRow = false;
   @Output() loadMore = new EventEmitter<any>();
   @Output() mangaClick = new EventEmitter<SManga>();
 
@@ -25,6 +26,7 @@ export class MangaListComponent implements OnInit, OnChanges {
   loadStatusEnum = LoadStatusEnum;
 
   loadStatus = LoadStatusEnum.LOADED;
+  cols = 3;
 
   constructor() {
   }

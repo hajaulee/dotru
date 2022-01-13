@@ -11,6 +11,8 @@ import {MatInput} from "@angular/material/input";
 
 export interface PopularMangaListPageComponentData {
   source: Source;
+  searching?: boolean;
+  searchQuery?: string;
 }
 
 @Component({
@@ -36,6 +38,10 @@ export class PopularMangaListPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.engine = new Engine(this.componentData.source);
+    if (this.componentData.searching && this.componentData.searchQuery){
+      this.searchQuery = this.componentData.searchQuery;
+      this.toggleSearching(true);
+    }
     this.loadMangaList(false);
   }
 
@@ -50,7 +56,9 @@ export class PopularMangaListPageComponent implements OnInit {
   loadMangaList(loadMore: boolean) {
     this.engine.getPopularMangaList(loadMore).subscribe((data) => {
       data.forEach((manga) => manga.source = this.componentData.source);
-      this.mangaList$.next(data);
+      if (!this.searching) {
+        this.mangaList$.next(data);
+      }
     });
   }
 
@@ -93,7 +101,9 @@ export class PopularMangaListPageComponent implements OnInit {
   loadSearchManga(loadMore: boolean = false) {
     this.engine.getSearchMangaList(this.searchQuery, {}, loadMore).subscribe((data) => {
       data.forEach((manga) => manga.source = this.componentData.source);
-      this.mangaList$.next(data);
+      if (this.searching) {
+        this.mangaList$.next(data);
+      }
     });
   }
 
