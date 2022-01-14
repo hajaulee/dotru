@@ -30,6 +30,8 @@
       <ng-container *ngIf="readingMode == readingModeEnum.L2R || readingMode == readingModeEnum.R2L">
         <div class="page-container-one-page"
              (click)="pageClick($event)"
+             appTouchSwipe
+             (onSwipe)="swipe($event)"
              >
           <img reloadViaProxyOnError [headers]="engine.source.parser?.headerBuilder()" src="{{pages[readingPageIndex].url}}" alt="{{pages[readingPageIndex].name}}"/>
         </div>

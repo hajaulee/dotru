@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ScreenTransmission} from "../../shares/injectable/screen-transmission";
 import {GlobalSearchPageComponent} from "./tabs/sources/global-search-page/global-search-page.component";
+import {SwipeDirection} from "../../shares/directives/touch-swipe.directive";
 
 
 @Component({
@@ -34,5 +35,14 @@ export class BrowserComponent implements OnInit {
   gotoGlobalSearch(query: string) {
     this.screenTransmission.goToScreen(GlobalSearchPageComponent, {searchQuery: query})
   }
+
+  swipe(swipeTo: SwipeDirection){
+    if (swipeTo === 'left' && this.activeTab < 2){
+      this.activeTab++;
+    }else if (swipeTo === 'right' && this.activeTab > 0){
+      this.activeTab--;
+    }
+  }
+
 
 }

@@ -10,7 +10,7 @@ import {Engine} from "../../shares/services/manga-engine";
 import {isSavedManga, saveManga} from "../../shares/storages/manga";
 import {AppSettingsLoader} from "../../shares/injectable/app-settings-loader";
 import {ReadingModeEnum} from "../../shares/models/saved-manga";
-import {httpGetAsync} from "../../shares/utils/http-utils";
+import {SwipeDirection} from "../../shares/directives/touch-swipe.directive";
 
 export interface ReaderComponentData {
   manga: SManga;
@@ -126,6 +126,22 @@ export class ReaderComponent implements OnInit {
         this.nextPage()
       } else {
         this.toggleFullScreen()
+      }
+    }
+  }
+
+  swipe(swipeTo: SwipeDirection) {
+    if (swipeTo === 'left') {
+      if (this.readingMode === ReadingModeEnum.L2R) {
+        this.nextPage();
+      } else if (this.readingMode === ReadingModeEnum.R2L) {
+        this.previousPage();
+      }
+    } else if (swipeTo === 'right') {
+      if (this.readingMode === ReadingModeEnum.L2R) {
+        this.previousPage();
+      } else if (this.readingMode === ReadingModeEnum.R2L) {
+        this.nextPage();
       }
     }
   }

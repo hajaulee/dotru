@@ -22,8 +22,14 @@
     </button>
   </div>
 </app-header>
-<div class="content">
-  <mat-tab-group mat-stretch-tabs  [(selectedIndex)]="activeTab" *ngIf="loaded" mat-align-tabs="center">
+<div class="content" appTouchSwipe (onSwipe)="swipe($event)">
+  <mat-tab-group
+    *ngIf="loaded"
+    [(selectedIndex)]="activeTab"
+    animationDuration="300"
+    mat-stretch-tabs
+    mat-align-tabs="center"
+  >
     <mat-tab label="Sources">
       <app-sources></app-sources>
     </mat-tab>

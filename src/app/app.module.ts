@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -39,12 +39,12 @@ import {ReadMoreDescriptionComponent} from './components/read-more-description/r
 import {IconButtonComponent} from './components/icon-button/icon-button.component';
 import {WebViewComponent} from './pages/web-view/web-view.component';
 import {SafePipe} from "./shares/pipes/safe-url";
-import { ReaderComponent } from './pages/reader/reader.component';
+import {ReaderComponent} from './pages/reader/reader.component';
 import {MatSliderModule} from "@angular/material/slider";
-import { InlineCardComponent } from './components/inline-card/inline-card.component';
+import {InlineCardComponent} from './components/inline-card/inline-card.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatDividerModule} from "@angular/material/divider";
-import { LatestMangaListPageComponent } from './pages/browser/tabs/sources/latest-manga-list-page/latest-manga-list-page.component';
+import {LatestMangaListPageComponent} from './pages/browser/tabs/sources/latest-manga-list-page/latest-manga-list-page.component';
 import {MatInputModule} from "@angular/material/input";
 import {MaxLengthPipe} from "./shares/pipes/max-length";
 import {RelativeDatePipe} from "./shares/pipes/releative-date";
@@ -52,11 +52,12 @@ import {LoadingBarModule} from "@ngx-loading-bar/core";
 import {DeferLoadModule} from "@trademe/ng-defer-load";
 import {MatSelectModule} from "@angular/material/select";
 import {MatMenuModule} from "@angular/material/menu";
-import { CornerCoverComponent } from './components/corner-cover/corner-cover.component';
+import {CornerCoverComponent} from './components/corner-cover/corner-cover.component';
 import {MatBadgeModule} from "@angular/material/badge";
 import {NgxCodejarModule} from "ngx-codejar";
-import { ReloadViaProxyOnErrorDirective } from './shares/directives/reload-via-proxy-on-error.directive';
-import { GlobalSearchPageComponent } from './pages/browser/tabs/sources/global-search-page/global-search-page.component';
+import {ReloadViaProxyOnErrorDirective} from './shares/directives/reload-via-proxy-on-error.directive';
+import {GlobalSearchPageComponent} from './pages/browser/tabs/sources/global-search-page/global-search-page.component';
+import { TouchSwipeDirective } from './shares/directives/touch-swipe.directive';
 
 
 @NgModule({
@@ -92,37 +93,38 @@ import { GlobalSearchPageComponent } from './pages/browser/tabs/sources/global-s
     LatestMangaListPageComponent,
     CornerCoverComponent,
     ReloadViaProxyOnErrorDirective,
-    GlobalSearchPageComponent
+    GlobalSearchPageComponent,
+    TouchSwipeDirective
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        BrowserAnimationsModule,
-        MatFormFieldModule,
-        MatTabsModule,
-        MatTabGroupGestureModule,
-        FormsModule,
-        MatRippleModule,
-        MatGridListModule,
-        MatProgressSpinnerModule,
-        PortalModule,
-        ReadMoreModule,
-        MatChipsModule,
-        MatSliderModule,
-        MatSlideToggleModule,
-        MatDividerModule,
-        MatInputModule,
-        LoadingBarModule,
-        DeferLoadModule,
-        MatSelectModule,
-        MatOptionModule,
-        MatMenuModule,
-        MatBadgeModule,
-        NgxCodejarModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatTabsModule,
+    MatTabGroupGestureModule,
+    FormsModule,
+    MatRippleModule,
+    MatGridListModule,
+    MatProgressSpinnerModule,
+    PortalModule,
+    ReadMoreModule,
+    MatChipsModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatDividerModule,
+    MatInputModule,
+    LoadingBarModule,
+    DeferLoadModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatMenuModule,
+    MatBadgeModule,
+    NgxCodejarModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
