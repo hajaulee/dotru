@@ -65,6 +65,13 @@
     (onClick)="gotoRepo()"
   >
   </app-inline-card>
+  <app-inline-card
+    matIcon=""
+    title=""
+    subTitle=""
+  >
+    <div style="width: 100px; height: 48px" (click)="abc()"></div>
+  </app-inline-card>
 
   <mat-menu #readingModeMenu="matMenu">
     <button mat-menu-item (click)="toggleReadingMode(readingModeEnum.L2R)">

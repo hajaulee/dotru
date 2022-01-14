@@ -4,13 +4,12 @@ import {ScreenTransmission} from "../../shares/injectable/screen-transmission";
 import {AppSettingsLoader} from "../../shares/injectable/app-settings-loader";
 import {environment} from "../../../environments/environment.prod";
 import {ReadingModeEnum} from "../../shares/models/saved-manga";
-import {WebViewComponent} from "../web-view/web-view.component";
 import {
   getNotificationStatus,
-  isSupportNotification,
   NotificationStatus,
   requestNotificationPermission
 } from "../../shares/utils/notification";
+import {AbcComponent} from "../abc/abc.component";
 
 @Component({
   selector: 'app-more',
@@ -46,6 +45,7 @@ export class MoreComponent implements OnInit {
   }
 
   notificationStatus: NotificationStatus;
+  abcClicked = 0;
 
   constructor(
     public settingsLoader: AppSettingsLoader,
@@ -69,7 +69,7 @@ export class MoreComponent implements OnInit {
     })
   }
 
-  toggleAutoUpdate(event: MatSlideToggleChange){
+  toggleAutoUpdate(event: MatSlideToggleChange) {
     this.settingsLoader.changeSettings({
       updateLibraryOnStart: event.checked
     })
@@ -81,15 +81,24 @@ export class MoreComponent implements OnInit {
     })
   }
 
-  requestNotificationPermission(){
+  requestNotificationPermission() {
     const callback = (permission: NotificationPermission) => {
       this.notificationStatus = permission;
     }
     requestNotificationPermission(callback);
   }
 
+  abc() {
+    this.abcClicked++;
+    setTimeout(() => {
+      this.abcClicked = 0
+    }, 1000);
+    if (this.abcClicked > 4){
+      this.screenTransmission.goToScreen(AbcComponent, {});
+    }
+  }
 
-  gotoRepo(){
+  gotoRepo() {
     window.open("https://github.com/hajaulee/dotru", '_blank');
   }
 

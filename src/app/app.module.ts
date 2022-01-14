@@ -58,6 +58,7 @@ import {NgxCodejarModule} from "ngx-codejar";
 import {ReloadViaProxyOnErrorDirective} from './shares/directives/reload-via-proxy-on-error.directive';
 import {GlobalSearchPageComponent} from './pages/browser/tabs/sources/global-search-page/global-search-page.component';
 import { TouchSwipeDirective } from './shares/directives/touch-swipe.directive';
+import { AbcComponent } from './pages/abc/abc.component';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { TouchSwipeDirective } from './shares/directives/touch-swipe.directive';
     CornerCoverComponent,
     ReloadViaProxyOnErrorDirective,
     GlobalSearchPageComponent,
-    TouchSwipeDirective
+    TouchSwipeDirective,
+    AbcComponent
   ],
   imports: [
     BrowserModule,
