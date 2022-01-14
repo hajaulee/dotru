@@ -30,13 +30,34 @@
     mat-stretch-tabs
     mat-align-tabs="center"
   >
-    <mat-tab label="Sources">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <app-icon-button
+          icon="list"
+          [color]="activeTab == 0 ? 'primary' : undefined"
+          label="Sources">
+        </app-icon-button>
+      </ng-template>
       <app-sources></app-sources>
     </mat-tab>
-    <mat-tab label="Extensions">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <app-icon-button
+          icon="extension"
+          [color]="activeTab == 1 ? 'primary' : undefined"
+          label="Extensions">
+        </app-icon-button>
+      </ng-template>
       <app-extensions></app-extensions>
     </mat-tab>
     <mat-tab label="Migrate">
+      <ng-template mat-tab-label>
+        <app-icon-button
+          icon="drive_file_move_outline"
+          [color]="activeTab == 2 ? 'primary' : undefined"
+          label="Migrate">
+        </app-icon-button>
+      </ng-template>
       <app-migrate></app-migrate>
     </mat-tab>
   </mat-tab-group>
