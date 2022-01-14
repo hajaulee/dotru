@@ -39,7 +39,7 @@ export class ReaderComponent implements OnInit {
   fullscreen = false;
   fullscreenDelayTime = 500;
   timer: any;
-  readingPageIndex = 0;
+  readingPageIndex = 1;
   engine: Engine;
   chapter: SChapter;
   readingMode: ReadingModeEnum;
@@ -148,13 +148,13 @@ export class ReaderComponent implements OnInit {
 
 
   previousPage() {
-    if (this.readingPageIndex > 0) {
+    if (this.readingPageIndex > 1) {
       this.readingPageIndex--
     }
   }
 
   nextPage() {
-    if (this.readingPageIndex < this.currentPages.length - 1) {
+    if (this.readingPageIndex < this.currentPages.length) {
       this.readingPageIndex++;
     }
   }

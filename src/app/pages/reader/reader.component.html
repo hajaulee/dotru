@@ -19,11 +19,12 @@
     <ng-container *ngIf="pages.length > 0; else empty">
       <ng-container *ngIf="readingMode == readingModeEnum.WEB_TOON">
         <ng-container *ngFor="let page of pages;let i = index">
-          <div class="page-container" id="page-{{i}}"
-               (click)="readingPageIndex = i;pageClick($event)"
-               (wheel)="readingPageIndex = i"
+          <div class="page-container" id="page-{{i+1}}"
+               (click)="readingPageIndex = i+1;pageClick($event)"
+               (wheel)="readingPageIndex = i+1"
           >
-            <img reloadViaProxyOnError [headers]="engine.source.parser?.headerBuilder()" src="{{page.url}}" alt="{{page.name}}"/>
+            <img reloadViaProxyOnError [headers]="engine.source.parser?.headerBuilder()" src="{{page.url}}"
+                 alt="{{page.name}}"/>
           </div>
         </ng-container>
       </ng-container>
@@ -32,8 +33,9 @@
              (click)="pageClick($event)"
              appTouchSwipe
              (onSwipe)="swipe($event)"
-             >
-          <img reloadViaProxyOnError [headers]="engine.source.parser?.headerBuilder()" src="{{pages[readingPageIndex].url}}" alt="{{pages[readingPageIndex].name}}"/>
+        >
+          <img reloadViaProxyOnError [headers]="engine.source.parser?.headerBuilder()"
+               src="{{pages[readingPageIndex-1].url}}" alt="{{pages[readingPageIndex-1].name}}"/>
         </div>
       </ng-container>
       <div *ngIf="!fullscreen" class="page-jump-container">
@@ -44,8 +46,8 @@
           <span>{{readingPageIndex}}</span>
           <mat-slider
             class="reader-slider"
-            [max]="pages.length-1"
-            [min]="0"
+            [max]="pages.length"
+            [min]="1"
             [step]="1"
             [thumbLabel]="true"
             [(ngModel)]="readingPageIndex"
@@ -53,11 +55,15 @@
             (valueChange)="jumpPage($event)"
           >
           </mat-slider>
-          <span>{{pages.length - 1}}</span>
+          <span>{{pages.length}}</span>
         </div>
         <button mat-mini-fab color="primary" (click)="nextChapter()">
           <mat-icon>last_page</mat-icon>
         </button>
+      </div>
+
+      <div class="reading-page-status">
+        {{readingPageIndex}}/{{pages.length}}
       </div>
     </ng-container>
   </ng-container>
