@@ -102,5 +102,9 @@ export class MoreComponent implements OnInit {
     window.open("https://github.com/hajaulee/dotru", '_blank');
   }
 
+  gotoJap(){
+    window.location.href = "https://hajaulee.github.io/jap";
+  }
+
 
 }

@@ -60,6 +60,7 @@ import {GlobalSearchPageComponent} from './pages/browser/tabs/sources/global-sea
 import { TouchSwipeDirective } from './shares/directives/touch-swipe.directive';
 import { AbcComponent } from './pages/abc/abc.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -127,7 +128,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatMenuModule,
     MatBadgeModule,
     NgxCodejarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule
   ],
   providers: [MatSnackBarModule],
   bootstrap: [AppComponent]

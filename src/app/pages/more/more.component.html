@@ -65,6 +65,20 @@
     (onClick)="gotoRepo()"
   >
   </app-inline-card>
+  <mat-expansion-panel class="mat-elevation-z0" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        More apps
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-inline-card
+      matIcon="translate"
+      title="Jap"
+      subTitle="Learn Japanese"
+      (onClick)="gotoJap()"
+    >
+    </app-inline-card>
+  </mat-expansion-panel>
   <app-inline-card
     matIcon=""
     title=""
