@@ -59,6 +59,7 @@ import {ReloadViaProxyOnErrorDirective} from './shares/directives/reload-via-pro
 import {GlobalSearchPageComponent} from './pages/browser/tabs/sources/global-search-page/global-search-page.component';
 import { TouchSwipeDirective } from './shares/directives/touch-swipe.directive';
 import { AbcComponent } from './pages/abc/abc.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 @NgModule({
@@ -125,9 +126,10 @@ import { AbcComponent } from './pages/abc/abc.component';
     MatOptionModule,
     MatMenuModule,
     MatBadgeModule,
-    NgxCodejarModule
+    NgxCodejarModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [MatSnackBarModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {

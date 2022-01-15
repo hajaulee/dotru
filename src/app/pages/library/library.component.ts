@@ -8,6 +8,7 @@ import {merge} from "rxjs";
 import {Engine} from "../../shares/services/manga-engine";
 import {AppSettingsLoader} from "../../shares/injectable/app-settings-loader";
 import {createNotification} from "../../shares/utils/notification";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-library',
@@ -22,7 +23,9 @@ export class LibraryComponent implements OnInit {
 
   constructor(
     public settingsLoader: AppSettingsLoader,
-    private screenTransmission: ScreenTransmission) {
+    private screenTransmission: ScreenTransmission,
+    private _snackBar: MatSnackBar
+  ) {
   }
 
   ngOnInit(): void {
@@ -70,6 +73,11 @@ export class LibraryComponent implements OnInit {
     createNotification(mangaTitle, {
       body: chapterTitle,
       vibrate: [1]
+    });
+    this._snackBar.open('Updated: ' + mangaTitle, 'OK', {
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
     });
   }
 
