@@ -21,9 +21,7 @@
         <ng-container *ngFor="let page of pages;let i = index">
           <div class="page-container" id="page-{{i+1}}"
                (click)="readingPageIndex = i+1;pageClick($event)"
-               (wheel)="readingPageIndex = i+1"
-               (touchstart)="readingPageIndex = i+1"
-          >
+               (touchstart)="readingPageIndex = i+1">
             <img reloadViaProxyOnError [headers]="engine.source.parser?.headerBuilder()" src="{{page.url}}"
                  alt="{{page.name}}"/>
           </div>
