@@ -242,4 +242,15 @@ export class ReaderComponent implements OnInit {
     };
     return corner;
   }
+
+  onScroll(event: any){
+    const displayingImageIndexes = Array.from(
+      {length: this.currentPages.length}, (_, i) => i + 1
+    ).filter((index) => {
+      return (document.getElementById('page-' + index)?.offsetTop ?? 0) >= event.target.scrollTop + event.target.offsetTop;
+    });
+    if (displayingImageIndexes.length > 0){
+      this.readingPageIndex = displayingImageIndexes[0];
+    }
+  }
 }

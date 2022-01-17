@@ -13,7 +13,7 @@
     </button>
   </div>
 </app-header>
-<div class="reader-content" [ngClass]="{'content-no-footer': !fullscreen, 'content-fullscreen': fullscreen}">
+<div class="reader-content" (scroll)="onScroll($event)" [ngClass]="{'content-no-footer': !fullscreen, 'content-fullscreen': fullscreen}">
 
   <ng-container *ngIf="pages$ | async as pages; else loading">
     <ng-container *ngIf="pages.length > 0; else empty">
