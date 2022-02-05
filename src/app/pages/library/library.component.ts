@@ -63,7 +63,9 @@ export class LibraryComponent implements OnInit {
         setTimeout(() => this.updatedMangaTitle = undefined, 2000);
       }
 
-      if (Math.max(...detailManga.readChapters) != detailManga.chapters[0]?.chapterNumber) {
+      const lastReadChapter = detailManga.chapters[0]?.chapterNumber;
+      const latestChapter = Math.max(...detailManga.readChapters);
+      if (latestChapter && latestChapter != lastReadChapter) {
         this.notifyUnreadChapter(detailManga.title, detailManga.chapters[0]?.name);
       }
     });
