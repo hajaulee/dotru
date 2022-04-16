@@ -1,5 +1,7 @@
 import {Extension} from "../models/extension";
 import {Source} from "../models/source";
+import {BaseParser} from "../models/base-parser";
+import {httpGetSync} from "./http-utils";
 
 
 export function groupByKey<Type>(exts: Array<Type>, key: string): Array<Array<Type>> {
@@ -14,7 +16,8 @@ export function groupByKey<Type>(exts: Array<Type>, key: string): Array<Array<Ty
 
 export function initSourceFromExtension(ext: Extension): Source {
   const Parser = eval("(" + ext.sourceCode + ")");
-  const parser = new Parser();
+  const parser: BaseParser = new Parser();
+  parser.httpGetSync = httpGetSync;
   return {
     ...ext,
     loadedManga: undefined,

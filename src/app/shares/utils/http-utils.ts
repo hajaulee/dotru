@@ -25,8 +25,14 @@ function fetchData(url: string, subscriber: Subscriber<any>, useCache: boolean) 
   });
 }
 
-export function httpGetAsync(url: string, useProxy = true, useCache: boolean = false, proxyParams: ProxyParams = {}, headers: { [k: string]: string } = {}): Observable<string> {
-  // TODO use cacheTime instead of useCache
+function httpGet(theUrl: string) {
+  const xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("GET", theUrl, false); // false for synchronous request
+  xmlHttp.send(null);
+  return xmlHttp.responseText;
+}
+
+export function createUrl(url: string, useProxy = true, proxyParams: ProxyParams = {}, headers: { [k: string]: string } = {}): string {
   if (useProxy) {
     url = `${PROXY_URL}?url=${encodeURIComponent(url)}`;
     if (proxyParams) {
@@ -40,7 +46,12 @@ export function httpGetAsync(url: string, useProxy = true, useCache: boolean = f
       });
     }
   }
+  return url;
+}
 
+export function httpGetAsync(url: string, useProxy = true, useCache: boolean = false, proxyParams: ProxyParams = {}, headers: { [k: string]: string } = {}): Observable<string> {
+  // TODO use cacheTime instead of useCache
+  url = createUrl(url, useProxy, proxyParams, headers);
   return new Observable<string>(subscriber => {
 
     if ('caches' in window && useCache) {
@@ -60,4 +71,9 @@ export function httpGetAsync(url: string, useProxy = true, useCache: boolean = f
     }
 
   });
+}
+
+export function httpGetSync(url: string, useProxy = true, useCache: boolean = false, proxyParams: ProxyParams = {}, headers: { [k: string]: string } = {}, timeout = 2): string {
+  url = createUrl(url, useProxy, proxyParams, headers);
+  return httpGet(url);
 }

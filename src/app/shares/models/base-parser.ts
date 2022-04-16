@@ -2,6 +2,7 @@ import {SManga} from "./smanga";
 import {SChapter} from "./schapter";
 import {SPage} from "./spage";
 import {FilterList} from "./filter-list";
+import {httpGetSync, ProxyParams} from "../utils/http-utils";
 
 export class BaseParser {
 
@@ -10,7 +11,15 @@ export class BaseParser {
   thumbnail: string;
   lang: string;
   baseUrl: string;
-  supportsLatest: boolean
+  supportsLatest: boolean;
+  httpGetSync: (
+    url: string,
+    useProxy: boolean,
+    useCache: boolean,
+    proxyParams: ProxyParams,
+    headers: { [k: string]: string },
+    timeout : number
+  ) => string;
 
   headerBuilder: () => any;
 
