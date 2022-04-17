@@ -8,13 +8,14 @@ export function loadSettings(): AppSettings {
     darkMode: true,
     logHistory: true,
     updateLibraryOnStart: true,
-    defaultReadingMode: ReadingModeEnum.WEB_TOON
+    defaultReadingMode: ReadingModeEnum.WEB_TOON,
+    maskPreviousChapterAsRead: true
   }
   const savedSettings = loadObject(KeySettings, {});
   return {...defaultSettings, ...savedSettings};
 }
 
-export function saveSettings(settings: AppSettings) {
+export function saveSettings(settings: Partial<AppSettings>) {
   const savedSettings = loadSettings();
   saveObject(KeySettings, {...savedSettings, ...settings});
 }

@@ -75,6 +75,12 @@ export class MoreComponent implements OnInit {
     })
   }
 
+  toggleMarkPreviousChapterAsRead(event: MatSlideToggleChange) {
+    this.settingsLoader.changeSettings({
+      maskPreviousChapterAsRead: event.checked
+    })
+  }
+
   toggleReadingMode(mode: ReadingModeEnum) {
     this.settingsLoader.changeSettings({
       defaultReadingMode: mode

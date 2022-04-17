@@ -62,7 +62,7 @@
   </ng-template>
 
     <mat-menu #optionMenu="matMenu">
-    <button *ngIf="detailManga$ | async as manga" mat-menu-item (click)="markAsRead(manga)">
+    <button *ngIf="detailManga$ | async as manga" mat-menu-item (click)="markAllChapterAsRead(manga)">
       <span>Mark as read</span>
     </button>
   </mat-menu>

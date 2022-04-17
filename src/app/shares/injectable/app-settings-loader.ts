@@ -12,7 +12,7 @@ export class AppSettingsLoader {
   private _settings: AppSettings = loadSettings();
   private settings$ = new BehaviorSubject<AppSettings>(this._settings);
 
-  changeSettings(settings: AppSettings) {
+  changeSettings(settings: Partial<AppSettings>) {
     saveSettings(settings);
     this._settings = loadSettings();
     this.settings$.next(this.settings);

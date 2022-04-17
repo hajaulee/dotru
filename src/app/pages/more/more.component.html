@@ -50,6 +50,17 @@
     </mat-slide-toggle>
   </app-inline-card>
   <app-inline-card
+    matIcon="done_all"
+    title="Mask previous chapter as read"
+    subTitle="Mask previous chapter of reading chapter as read"
+  >
+    <mat-slide-toggle
+      color="primary"
+      [checked]="settingsLoader.settings.maskPreviousChapterAsRead"
+      (change)="toggleMarkPreviousChapterAsRead($event)">
+    </mat-slide-toggle>
+  </app-inline-card>
+  <app-inline-card
     [matIcon]="settingsLoader.settings.defaultReadingMode == readingModeEnum.L2R ? 'swipe_right_alt' :
     settingsLoader.settings.defaultReadingMode == readingModeEnum.R2L ? 'swipe_left_alt': 'swipe_down_alt' "
     title="Reading mode"

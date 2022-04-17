@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   title = 'dotru';
 
   portal: ComponentPortal<any>;
-  appSettings: AppSettings = {};
+  appSettings: AppSettings;
 
   constructor(
     private settingsLoader: AppSettingsLoader,

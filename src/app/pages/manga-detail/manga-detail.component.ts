@@ -10,6 +10,7 @@ import {isSavedManga, removeManga, saveManga} from "../../shares/storages/manga"
 import {loadLibraryMangaList, saveLibraryMangaList} from "../../shares/storages/library-manga-list";
 import {SChapter} from "../../shares/models/schapter";
 import {addMangaHistory, loadHistoryMangaList} from "../../shares/storages/history-manga-list";
+import {AppSettingsLoader} from "../../shares/injectable/app-settings-loader";
 
 
 export interface MangaDetailComponentData {
@@ -31,7 +32,8 @@ export class MangaDetailComponent implements OnInit {
   constructor(
     @Inject(COMPONENT_DATA)
     public componentData: MangaDetailComponentData,
-    private screenTransmission: ScreenTransmission
+    private screenTransmission: ScreenTransmission,
+    private settingsLoader: AppSettingsLoader,
   ) {
 
   }
@@ -86,7 +88,14 @@ export class MangaDetailComponent implements OnInit {
 
   readChapter(manga: SManga, chapter: SChapter) {
     chapter.read = true;
-    manga.readChapters = [...new Set([...manga.readChapters ?? [], chapter.chapterNumber])].sort();
+    if (this.settingsLoader.settings.maskPreviousChapterAsRead){
+      const maxReadChapterNumber = Math.max(...(manga.readChapters ?? []), chapter.chapterNumber);
+      manga.readChapters = manga.chapters
+        .filter(chapter => chapter.chapterNumber <= maxReadChapterNumber)
+        .map(chapter => chapter.chapterNumber)
+    }else{
+      manga.readChapters = [...new Set([...manga.readChapters ?? [], chapter.chapterNumber])].sort();
+    }
     this.componentData.manga = {...manga};
     if (isSavedManga(manga)) {
       saveManga(manga); // update saved data
@@ -94,7 +103,7 @@ export class MangaDetailComponent implements OnInit {
     this.screenTransmission.goToScreen(ReaderComponent, {manga, chapter});
   }
 
-  markAsRead(manga: SManga){
+  markAllChapterAsRead(manga: SManga){
     manga.readChapters = manga.chapters.map(chapter => chapter.chapterNumber);
     manga.chapters.forEach((chapter) => {
       chapter.read = true;
